@@ -1,0 +1,2785 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- REGLA: el título de la pestaña es siempre y únicamente "Targett".
+     Nunca la sección, nunca el idioma, nunca un sufijo. El router lo reescribe
+     con la misma constante en cada ruta. -->
+<title>Targett</title>
+<meta name="description" content="Estudio digital independiente en Bogotá. Diseñamos y desarrollamos sitios web y gestionamos campañas de Meta planeadas junto al sitio, con optimización sobre resultados reales." data-seo="description">
+<meta name="theme-color" content="#faf9f6">
+<meta name="color-scheme" content="light">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<meta name="author" content="Targett">
+
+<!-- Canonical, og:url y hreflang los reescribe el router en cada ruta a partir
+     de SITE_CONFIG.domain. Los valores de aquí son los de la portada en español
+     y son los que ve un rastreador que no ejecute JavaScript. -->
+<link rel="canonical" href="https://wearetargett.com/" data-seo="canonical">
+<link rel="alternate" hreflang="es" href="https://wearetargett.com/" data-seo="alt-es">
+<link rel="alternate" hreflang="en" href="https://wearetargett.com/en/" data-seo="alt-en">
+<link rel="alternate" hreflang="x-default" href="https://wearetargett.com/" data-seo="alt-default">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Targett">
+<meta property="og:locale" content="es_CO" data-seo="og-locale">
+<meta property="og:locale:alternate" content="en_US">
+<meta property="og:url" content="https://wearetargett.com/" data-seo="og-url">
+<meta property="og:title" content="Targett" data-seo="og-title">
+<meta property="og:description" content="El sitio y la pauta, construidos como una sola pieza. Estudio digital independiente en Bogotá." data-seo="og-description">
+<!-- ÚNICO archivo externo del sitio. og-image.png debe subirse junto al
+     index.html y servirse en una URL absoluta y pública: los rastreadores de
+     redes sociales no leen data: URIs ni rutas relativas. -->
+<meta property="og:image" content="https://wearetargett.com/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Targett — estudio digital independiente">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Targett" data-seo="tw-title">
+<meta name="twitter:description" content="El sitio y la pauta, construidos como una sola pieza. Estudio digital independiente en Bogotá." data-seo="tw-description">
+<meta name="twitter:image" content="https://wearetargett.com/og-image.png">
+<meta name="twitter:image:alt" content="Targett — estudio digital independiente">
+
+<!-- Favicon: imagen 22 (la marca "G."), embebida. -->
+<link rel="icon" type="image/png" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIAAAACACAYAAADDPmHLAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAVPSURBVHhe7d1pqG1jHMfxLy/IPM9TypzZRTKlhAyX3K4MJYUXMt4MoWRKuqS8IFPekimEEilThsz3kimFm0LGyHCxj355Tp37P49z9rPW2nuvdfbvU79Xt/ustf7rOXuv9axnPRvMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzBq3LrAdsD9wBHAicApwWspJwHHAYcBewDbAWrER64Yt0sm8DngMWAp8B/wNTPSZP4FvgHeBR4BrgfnA1nFj1g67AJcDLwK/Zk5oU/kdeC11rn3jTthwrQwsBJ4B/smcrGHkdeAcYJ24czZY+t5+L3NCRpVlwGXA6nFHrVn7Ac9nTkBb8jFwQtxpa8ZVhRdyo8ydwCrxAKya9YCnMkVue14BNo0HY2V026XbuFjcruSjdFtqFWwFfJYpateyxINK5dYG3s8Us6t5NB6gzeyJTBG7nrPjQVrexZnizYX8CGwYD9ZWtH0ah4/Fmyu5MR6wraiLt3sl+T5d31jGwZmCNREN074E3A/cClwDXApcmLIIuAK4AbgDeBx4B/g501YTOTUeuP3n6UyxqkZPBc8FdgdWixvq08bAUcA96Slg3EbVPBg3ZLAT0MsUqzRfpLkATdsZeDOzvSr50sPE0+njNxaqNHoQM8hRNw1Jf57ZbmnU0XeIjY+zlYAPMoUqie4cdosND8DpmW1XyZGx4XGmj9dYoNLo4m0Y1gd+yWy/NGfEhsfZWZkClUYTOYflw8z2S6M7D0vuzhSoJHpgpOlhw/Jy+sqpE3eAKVTQeFJL8lBscMD0jF+PqevEg0GJbod06xZPakk0Q9c6apMGpnHrGsI6SvfDdQeASidhaubu9cDNI8wxcafGla7e4wktzeGx0VlslGlj2Lk97tS40rt6sTilOSQ2OosNgJ8y7QwzN8WdGlfuAGNu70xxSlP6FeAO0CJNDAOXXgS6A7SInt7VfdZ+Zmx0Fu4ALbIG8HWmQCW5OjY6C3eAlqn7lq+mepVwB2gZvTQRC1QSvX5Vwh2gZbT8SixQSbQ4hKaU9Utz80e1oMRk3AGmODZToNJoSlm/tJrHs8CrNVJ3fqA7wBSafftbpkgl0Uf6ZrHhAToosw8lWRwbHHdNrPqhqeCrxoYHRBeecfslcQcILsgUqUq0KMMesfGGNTGFbVoHWA7zlsOhTaXXsUknGhD6I1OoKvkLuC8tBrll3FAFmm6mdhakt4bi9qpkWgfowacTMNFUenBg3EbbPZApVN3o2kLrDDwJ3JUuFrWe4EXh1bBLgCvTPIFb0ttADwMvAJ80cI0Sk+sAS+NJrJMeHBC30XbzMoWaq8l1gCXxJNZJFzuANPURO4xoAKrqgJI7wP/QFDF9h8eCtS2axrZtjRnN7gAz0HqAsWBty1tpX/Uaefy3fuIOMAO9K6j3+WPR2pTz075qBbD4b/3EHWAWmwNfZQrXhmjp+cll39wBBmjPGhdZg4wGrSa5AwyYFof+NlPAUeWN8B6iO8AQ7Fij0E1GawbFhR2q7pc7QKE1gXszhRxWtCZAbvq5O8CQHd/AaiKl0XoAmr6e4w4wAnrke14aiYuFbTIakNKycjMt9OwOMEJ6tVxP/PSrXj9kilw1WtJVD4N2jRvM0BqE8f/3k9tiQz1YFk9infTyX1lzll741M+6aarVc2nNgX7fN1DneTtdY2gRR72y3i89SdRfc2mOjg31YFEPFjcY/fbh2NLXhH5vYJ8pPxSpk6sfmzo5dRb9hejn5rTwk5mZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZlZl/0L6rwAqjmcGbcAAAAASUVORK5CYII=">
+<link rel="apple-touch-icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIAAAACACAYAAADDPmHLAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAVPSURBVHhe7d1pqG1jHMfxLy/IPM9TypzZRTKlhAyX3K4MJYUXMt4MoWRKuqS8IFPekimEEilThsz3kimFm0LGyHCxj355Tp37P49z9rPW2nuvdfbvU79Xt/ustf7rOXuv9axnPRvMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzBq3LrAdsD9wBHAicApwWspJwHHAYcBewDbAWrER64Yt0sm8DngMWAp8B/wNTPSZP4FvgHeBR4BrgfnA1nFj1g67AJcDLwK/Zk5oU/kdeC11rn3jTthwrQwsBJ4B/smcrGHkdeAcYJ24czZY+t5+L3NCRpVlwGXA6nFHrVn7Ac9nTkBb8jFwQtxpa8ZVhRdyo8ydwCrxAKya9YCnMkVue14BNo0HY2V026XbuFjcruSjdFtqFWwFfJYpateyxINK5dYG3s8Us6t5NB6gzeyJTBG7nrPjQVrexZnizYX8CGwYD9ZWtH0ah4/Fmyu5MR6wraiLt3sl+T5d31jGwZmCNREN074E3A/cClwDXApcmLIIuAK4AbgDeBx4B/g501YTOTUeuP3n6UyxqkZPBc8FdgdWixvq08bAUcA96Slg3EbVPBg3ZLAT0MsUqzRfpLkATdsZeDOzvSr50sPE0+njNxaqNHoQM8hRNw1Jf57ZbmnU0XeIjY+zlYAPMoUqie4cdosND8DpmW1XyZGx4XGmj9dYoNLo4m0Y1gd+yWy/NGfEhsfZWZkClUYTOYflw8z2S6M7D0vuzhSoJHpgpOlhw/Jy+sqpE3eAKVTQeFJL8lBscMD0jF+PqevEg0GJbod06xZPakk0Q9c6apMGpnHrGsI6SvfDdQeASidhaubu9cDNI8wxcafGla7e4wktzeGx0VlslGlj2Lk97tS40rt6sTilOSQ2OosNgJ8y7QwzN8WdGlfuAGNu70xxSlP6FeAO0CJNDAOXXgS6A7SInt7VfdZ+Zmx0Fu4ALbIG8HWmQCW5OjY6C3eAlqn7lq+mepVwB2gZvTQRC1QSvX5Vwh2gZbT8SixQSbQ4hKaU9Utz80e1oMRk3AGmODZToNJoSlm/tJrHs8CrNVJ3fqA7wBSafftbpkgl0Uf6ZrHhAToosw8lWRwbHHdNrPqhqeCrxoYHRBeecfslcQcILsgUqUq0KMMesfGGNTGFbVoHWA7zlsOhTaXXsUknGhD6I1OoKvkLuC8tBrll3FAFmm6mdhakt4bi9qpkWgfowacTMNFUenBg3EbbPZApVN3o2kLrDDwJ3JUuFrWe4EXh1bBLgCvTPIFb0ttADwMvAJ80cI0Sk+sAS+NJrJMeHBC30XbzMoWaq8l1gCXxJNZJFzuANPURO4xoAKrqgJI7wP/QFDF9h8eCtS2axrZtjRnN7gAz0HqAsWBty1tpX/Uaefy3fuIOMAO9K6j3+WPR2pTz075qBbD4b/3EHWAWmwNfZQrXhmjp+cll39wBBmjPGhdZg4wGrSa5AwyYFof+NlPAUeWN8B6iO8AQ7Fij0E1GawbFhR2q7pc7QKE1gXszhRxWtCZAbvq5O8CQHd/AaiKl0XoAmr6e4w4wAnrke14aiYuFbTIakNKycjMt9OwOMEJ6tVxP/PSrXj9kilw1WtJVD4N2jRvM0BqE8f/3k9tiQz1YFk9infTyX1lzll741M+6aarVc2nNgX7fN1DneTtdY2gRR72y3i89SdRfc2mOjg31YFEPFjcY/fbh2NLXhH5vYJ8pPxSpk6sfmzo5dRb9hejn5rTwk5mZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZlZl/0L6rwAqjmcGbcAAAAASUVORK5CYII=">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+<!-- Datos estructurados. Sólo lo que el sitio afirma de verdad: sin teléfono
+     (el de WhatsApp sigue siendo un marcador), sin reseñas, sin
+     aggregateRating, sin premios, sin número de proyectos y sin años de
+     experiencia. Añade "sameAs" cuando existan los perfiles sociales reales. -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  "name": "Targett",
+  "description": "Estudio digital independiente. Diseño y desarrollo web, y campañas de Meta Ads planeadas junto al sitio.",
+  "url": "https://wearetargett.com/",
+  "email": "hola@wearetargett.com",
+  "image": "https://wearetargett.com/og-image.png",
+  "inLanguage": ["es", "en"],
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Bogotá",
+    "addressCountry": "CO"
+  },
+  "areaServed": { "@type": "Country", "name": "Colombia" },
+  "knowsAbout": [
+    "Diseño web",
+    "Desarrollo web",
+    "Meta Ads",
+    "Publicidad en Instagram",
+    "Publicidad en Facebook",
+    "SEO técnico",
+    "Optimización de conversión"
+  ],
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "Servicios",
+    "itemListElement": [
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Diseño y desarrollo web",
+          "description": "Del planteamiento al sitio en producción: estrategia de contenido, UX/UI, dirección visual, desarrollo, responsive, performance y SEO técnico."
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Meta Ads",
+          "description": "Campañas en Instagram y Facebook: estrategia, estructura de cuenta, Pixel y API de Conversiones, creatividades, públicos, Advantage+ y optimización sobre datos reales."
+        }
+      }
+    ]
+  }
+}
+</script>
+<!-- FAQPage: las cuatro preguntas y respuestas son literalmente las que se ven
+     en el inicio. Si cambia el texto de la página, cambia también aquí. -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "inLanguage": "es",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "¿Cuánto tarda un proyecto?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Depende del alcance. Después de revisar tu proyecto definimos el cronograma en la propuesta, con etapas y entregas, para que sepas qué esperar y cuándo." }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Puedo contratar solo una parte del servicio?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Sí. Puedes empezar únicamente con el sitio o con las campañas y sumar la otra parte cuando tenga sentido para tu negocio." }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Cuánto debo invertir en pauta?",
+      "acceptedAnswer": { "@type": "Answer", "text": "No hay un presupuesto único. La inversión depende de tu mercado, tu ticket promedio y el objetivo. Definimos un punto de partida que permita generar resultados y datos útiles desde el inicio, y lo ajustamos con lo que muestre la cuenta." }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Cómo empezamos?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Escríbenos contándonos qué necesitas. Revisamos el proyecto y te respondemos con una propuesta de alcance, tiempos e inversión." }
+    }
+  ]
+}
+</script>
+<style>
+/* ==========================================================================
+   TARGETT — sistema de diseño
+   Estudio digital independiente. Oferta deliberadamente estrecha:
+   01 Diseño y desarrollo web · 02 Meta Ads
+
+   El motivo estructural del sitio es la LÍNEA: reglas finas que dividen,
+   numeran y conectan. No hay tarjetas, ni sombras, ni degradados. La
+   jerarquía la construyen el tamaño tipográfico, el espacio y el acento.
+   ========================================================================== */
+
+:root {
+  --ink: #0b0b0e;
+  --ink-soft: #17171c;
+  --paper: #faf9f6;
+  --paper-dim: #efeee9;
+
+  /* Naranja de marca. --accent es el color pleno: superficies, reglas, puntos
+     y tipografía grande. --accent-deep es el MISMO naranja oscurecido lo justo
+     para pasar AA (>=4.5:1) en texto pequeño y en botones con texto claro.
+     No es un color nuevo: es el mismo tono. */
+  --accent: #ff4d2e;
+  --accent-deep: #c4310e;
+  /* Verde lima: sólo interacciones puntuales sobre fondo oscuro. */
+  --lime: #c6ff3d;
+  --wa: #25D366;
+
+  --line: rgba(11, 11, 14, 0.12);
+  --line-mid: rgba(11, 11, 14, 0.26);
+  --line-dark: rgba(250, 249, 246, 0.16);
+  --line-dark-mid: rgba(250, 249, 246, 0.3);
+  --muted: rgba(11, 11, 14, 0.64);
+  --muted-dark: rgba(250, 249, 246, 0.68);
+
+  --display: "Space Grotesk", "Helvetica Neue", Arial, sans-serif;
+  --body: "Inter", "Helvetica Neue", Arial, sans-serif;
+
+  --container: 1240px;
+  --gutter: clamp(20px, 4vw, 48px);
+  --ease: cubic-bezier(.22, .8, .28, 1);
+  --ease-out: cubic-bezier(.16, 1, .3, 1);
+
+  /* Ritmo vertical. Compacto a propósito: sin los rótulos de sección, las
+     secciones se separan por la regla fina y el cambio de fondo, no por un
+     hueco grande. --pad-m es el ritmo normal, --pad-s el de móvil. */
+  --pad-m: clamp(32px, 3.6vw, 58px);
+  --pad-s: clamp(24px, 2.8vw, 34px);
+
+  /* LOGOTIPOS — el sitio es un único archivo, así que van embebidos como data
+     URI. Cada uno se declara UNA sola vez aquí y se reutiliza en la cabecera y
+     el pie de los dos idiomas. Un data URI no depende de la ruta, así que
+     sigue funcionando en /servicios, /nosotros o /en/about.
+       --logo-ink   → imagen 33, wordmark negro, cabecera
+       --logo-paper → imagen 36, wordmark crema, pie sobre fondo oscuro */
+  --logo-ink: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAjAAAABkCAYAAACYcQqnAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAB1BSURBVHhe7Z0J/HXVuMd/l4yVJiVKJSIzGSLzHMk8ZOgmbpmnUmYyJa6hojIUisRVhKgMFYlC5qtrlqs3lZCZ3JfPt3eda/dY5/z3OWettdfe+/l+Pr/PW/9zzl57r7PP3r+91rOeR3Icx2nHlSVdVdI6ktaXtFH4d11JVw+v/5v9kOM4juM4Tg6uKGkLSTtIeqSkvSQdJOkYSSdLOlPSdyX9VNLPJZ0v6SJJF4d/fyHpPEnnhvd9RdJpkj4s6W2S9pP0ZEn3l3RTSRvaHXAcx3Ecx1mJrSU9QtIBkk6Q9H1Jf5L090LC+HxL0gclvVjSzpK2tDvpOI7jOM64uVYwLIdL+rakv0RMRdfCQJ0t6VBJj5K0qT0Ix3Ecx3GGD6blPySdKOnXEcNQuy6RdJKkZ4TpLcdxHMdxBsz9JL1P0q8ipqCv+r2k4yU9XNKV7AE7juM4jtNPribpCZLOitz8h6ZzJO0raWPbCY7jOI7j9IO1JO0RgnDtjX7oYuXTy8JSbsdxHMdxegLLnb8RubGPTSzfJk7mCraDHMdxHMephxuFeBB7Ix+7mD67i+0sx3Ecx3G6Z+8Q0Gpv3q5/6tUhMZ/jOI7jOB2zeUg4Z2/WrrhOl7SV7UTHcRzHccpxb0mrIjdp12xR7uBetjMdxxkvt5L0WEmPKaBr28YdZ2Q8RdL/RW7Orna6VNKjbac61UF9rFL3levaxguxU2RfcuhBHtA+nYMjF4lceqBt3HFGxGsivwnXYnqi7VynKl4V+c5yCaNUGiq0s+zf7ksOkXX7KnYHnDW8LtJhuURGUccZI2+M/B5cy4n6Sk6dUNDTfl+5RE2w0mBgvhfZlxyiYrwbmCm4gXGcvBwU+S24ltffJN3ddrZTBW5g0skNzAzcwDhOPl4a+R240unCsKLLqQs3MOnkBmYGbmAcJw/EadjfgCu9zvAgx+pwA5NObmBm4AbGcdKzva82KipumE49uIFJJzcwM3AD4zhp2UDSTyLnvyuf/hqW7jp14AYmndzAzMANjOOk5bjIue/KrxPtF+F0hhuYdHIDMwM3MI6TDpKs2fPeVU5kOXa6xw1MOrmBmYEbGMdJwzUlXRA5713l9Hn7pTid4AYmndzAzGD/SIfl0pDrmHCCbSrpZpLuKGlHSY8MqaB3k/Sk8C//zw/uvpLuIOkmkjaRdGW7QacVa4VU4reTdH9Ju0h6QlgB9DhJD5N0V0nbSlrPfjgxb4uc867yIoC6Vjhf+b3zu+c68YCQkI9ssrsHcd4ykkcKec7dW0vaUtK6dmMV84LI95JLD7GNF+J/IvuSQ8TTYZhGA0sK1wknPP/O0psjHZZLnGi2/UXFsa1tD7wAV5S0TbgxvlzS+yWdJelcSb+LHHMbXRJO0i9KOio8vVBno4saH/Rpm/NmEbFdtOyS1+0k7SPpo5J+KOlPkT61Wh1GR1hye2Do35Q3hBuHxGq2XVd5HWm/nI7AMN9J0lODuf1cOF/5vdt9Xkl/DsUsvxXO+9eHByLMTanrIDfRye/Y/ratXhk5hlx6fKT9RTW5Rq10jLz+g8i+5NDPJG0U2YdFxb5XPaLDje/n4YJNvYZZ+n2kw3KJmg62/UXFsX1d0tXswWdg6/BE/15J3w8F5eyx5dAfwzFiMrnhXsPuWGKuGtprc94sIraLePqcF1b2PEfS2ZF+WlT/G/oWQ7osH4lsvyZxzl4cjDJ9+JlwIzw2mPD3SHqHpMPDf3Ou8xqBsUzLfDtcU0peLxYVx5n7tzKNW0h6nqSTwjlv9y2H+F5OkPTcYGhysbGkH7W8Piz6MLeIfhNpf1FNrlH27zGVemChnbb71EZsCwNcLdeLdMIQRRbOq9uDT8QW4YZ5anj6sW13ofPCTeZudmcTgRmkT227qXVL2/AMGPHiwsyx2+2kEkbxgCWeZKnobrfZpX4VnvYZacJ4Mw2BCd9wyalKzg8qyt9G0sPDCCQmaFVkH7oW07eloG8ZEfxKZD+6EA8h+4Xp7JQwRf6XSHuu/ukI++XWxFYhL4Ld6aGJJ+jUBuaekj5Q+AliETEVkroKKzco+tS2lVo8pbbhtmF6zn4+lxie5+Y8L0z72W2VFqaFkZMHhyflkjAkTXwb0ySMstp960LvtjuZAaaHjg4G2LZfg0ikyAga090puJak30bacfVP/FarxQ3M/BAwx1OrbaN28dTHTSsFNRkYgp67GPn6w5xBgQRXdrGfEzGl86owMlIDm0k6OLKfpcVUL6N3OcC4fDLSZs3iOrHsA48bmOHIDUwFSmFguBh9OrLtvol4BaYOl6EWA/OiyGdKioDftk+tL4l8vpROD8HDNUL/dTkywXd4I7tTS8J19X2Rtvok4pkWnYJ2AzMcuYGpQMsYGIL8Dopss8/65ZJPWTUYGGIJ7Pu7EHP9t7c7Z2A11Xcjny0hpjlZklszDwxGwu57KbU1oW14Zpims230VVz7WJEyD25ghiM3MBVoUQNzF0nnRLY3FC0aYd61gWHqxr63S7FiZ9ZqFkbv7GdKiBUufeENkf0vpZfZnVmA64RAZbvtIeg7c8Z8uYEZjtzAVKBFDAxPUmOoEvzBBWIAujQwm1cUANrUYXZHG3Rxc2YZJDkh+sL6HY5cMN2zDHcOOTjsdockYr52tQc+BTcww5EbmAo0r4FhWandxpB1/JxJ47o0MDXnUZm27Pubkffm1r/bnegB74wcRwl91u7IHJANd0xLhve2HRDBDcxw5AamAs1jYN4V+fwYNE9W0q4MzN0j76lJHzL7CwSIlkpkNRGpy+cxpLVALIo9lhIi+d4iPCWyrTHopbYjDG5ghiM3MBWorYF5e+SzYxKretrQlYE5M/KemsRviWRlTUgQZ9+XW22ekmuEOlRdBPMSw3QluzMrsGdkO2PSs22HNHADMxy5galAbQwM2ULt58YoApdXogsDw5JO+3qNoj5Vk9KmmN/zssvku4Iq3aR7t8eUW2RvnqfUCNmF7TbGqJ1txwTcwAxHbmAq0EoGhuR09jNjFYm9Virg1YWBYXrGvl6jqB/U5KuR9+QUicj6Cpl6u8hsTYAqQcRtoBxElwkJaxLFJm9gO8gNzKDkBqYCzTIwLH/savVDrVppWWlpA0NtlTaVpGsQ8S6Tizqp+kvfkCk62VcoEnpyqNHztUKirVNWWAY/AZNDkULb52PWF0P16SZuYIYjNzAVaJaBqXlVS1fi4oNpmEZpA8OKGvtazdot7Dc1muxrucWqGCcPx0T62yU93/STG5jhyA1MBZpmYHaKvNe1Rq+zndWgtIE5LvJazZr86Kl0bF/Lre0a35OTjkdF+tq1RkzBXbfRV25ghiM3MBUoZmBI3kZVYfte1xpdNGNYvZSBmdTvIcjSvlazvhD2+4WR13KK6apNGt+TkwZic86P9Lfrn6LS+gQ3MMORG5gKFDMwvpJgZbEEOEYpA8PNGHWxtHYZ/TT0U+lqy8Rn1F73qI8wGmn72nV5kbX8hqG/3MAMR25gKlDMwFCh177PdXl9xvTZhFIGhiJ/e0X+Xrt+H1Zyla5I/GX7RTlLs1llAeQYhUs7SI7YRqQMADcww5EbmApkDczNIu9x/atYLsoF3FLKwPRZPI1+PPL3nDrRflGJIL7h0QPXtOnSLupY/VDSsZL2CwHs95F0O0k3DefV9cO//D9/v7ekx4cMuQQad1X5nGXVa4fVWm5ghqGqDQwJr+wOD1HEczQNDBcG+x5XXI9p9NuE2gzM5KnU/r1LUeDvc5G/5xTBzjlgZZNta2iyWZ+BG3GpwqEXB7N0+wWyAltY1nzzkA7h3EhbOfXYMI05hgfjMegIe3LVBJV9SaP983BDmqWSjhrDYdtfVBwbQ+vNTJv8v22zCzHVwIWLAEH2kwrCvwx9XUslbArsWbo0MMR5MFRNHZp7Srp1qDfEUykja9wAWP2DST0t8vlS2jHkyLB/z6n32y8qEV2spiqt2OqtJ0Xel0MfmDLSmYL1JL0p0mYufUzSlSWd0/K+wqiN3UYucW217S+jNseHSj1cMa3Ydp/aiG291p5QNYFTJ3lUG70x0mG5RIpq2/4yamaW7WpOe1WIiXhaGBLmZnttSRtKWieYAlY7bBDmkLeRtEO4eewf4lFYrmi3m1s2syx0YWCo+PuMOVO+wx06Mqwsuy3d7rvtwSdirAamRJzcO2yjmdgn0nYO8fBFAkeuufY6HFPJEi6MJtv2c4vrFdnN7b7kEKNtGFa7D8to2dHAasCJ2Q7LJeZ0c1E69wvue985UpXPgpilkkYScUGiRk2TLgwMlYoXBWPIE6HdZk7tHjK92r/n1KH2wBMxRgOzZYFpEKpgk86hFKWSdlKapS0lUw081DZeCKrD233JIWZT+liFvggllxLezzaekJI/GMRy7dQ8K9JOTtmLe2kDw4V3WUobV5agk6be/j2nDrEHnYgxGpg9Iu9JrWnFEHNB4G+J6Yx5ph0ofmo/n0uPsI0XgFmO70X2JYdI37BSHbvRMhQDc2SkvVyiAGEuSJZm28slO/pR2sCwnHpZeNItGdDI6pHSU0i5Au7GaGCIS7HvSSlWGpUcfZnwqci+pNZnbaMzcAOTTm5gZjAUA1PiBzwRgZy5oN6ObS+XnmnaLmlg/hgKbqagZEVrVu6UDuIlxioHYzMwGIvccQvzjFKkpERg8s9CIG8b3MCkkxuYGQzFwJQa1ufGS5BuLhgOLrVS6RWm7ZIGhjIC8wbuTqNk/NAuHSyjzjXiNzYDw4q23InizpJ0dFg5Vkq0V2JlHgH3xBC1wQ1MOrmBmcEQDEzJk4kbfM6TicDUCyPt5tBbTNslDQw/yrZPcytBXgy7/Vxi2u0Tkb/n1An2gBMxBgPDcvwJjJza113z6U6N/pyFG5h0cgMzgyEYGJaElbrx/jicvLkgWRTz6LbdHLK5YEoamO+YtpfheZHt5xJxOzzx2r/n1Bn2gBMxBgOzfeN4SwfJD1FtV/y4gUknNzAzGIKBYYnZrUKys9yKZfZMTamU4QQ+N3EDs7J4in9r5O85xXLNHKZ5DAamOWJwYOR113zas9Gfs3ADk05uYGYwBAPTdwguJNHd1qEGSikT8V6zH25gVhbJCqlNY/+eU2R1TpFvyDIGA8PvaQL1hOzrrvn0/EZ/zsINTDq5gZmBG5h8EONB9kpS4pN99yGSnhqCZ0mbT3ruL4WVEaTDzp1gy8oNzPzCwOwa+XtOEdR9Y3vQCRiDgWnGwHw68rprPhFv1gY3MOnkBmYGbmDmhwKSrESibMDdQ3r5Z4cllKR9p3rwV0MGxd9IWh3pixrkBmZ+MYV018jfcytFzhzLGAxMcxUSK4Ts66759JpGf87CDUw6uYGZgRuYy0OdiC3CiAk1Nrg5UjSNwE3qFn0rFMOiYKM9vr7JDcz8wkiwlNT+PbdeYg86AWMzMKVSLQxZ3C/a4AYmndzAzGDsBobpHYwKJuWUkNX1z5F9H6LcwMwvllETs8TImn0tpz5pDzoBYzMw/x153TWf3MCswQ1MJYzNwHDiMQVwQCjKVyppXI0aioEpGVRLKQFgitC+llME8l7DHPeyuIFxzavXN/pzFm5g0skNzAzGYmA2krRXmAKy+zVWDcXAUOX8baFqc07Rxm1Dm0dFjim3HmyOe1nGZmB8Cml5tS2V4AYmndzAzGDoBoaVQPtKWhXZn7FrKAamC54eOabc+qjdiSV5bKSNoalpYEoX4RyiGO1sgxuYdHIDM4MhG5i7SfpmZD9ca+QGZnFInGiPKbeo43MTuyNLwEo6gpJL6okF6hE1xUrBCadGXnfNJ4x7G9zApJMbmBmUNDA5qzhbSgZ29lVuYBaHkT2q89rjyq0cwbwlITOuPaacaubPOS7yekphzMii/e1wfg9RpI1oQ0kDw1RoaUoaGBaWuIGZQkkD07aOxrKUrE7cZ7mBWQ4qAdvjKiGSIfYV8iTZ48mp5ojVOyKvpxSpFTZttDdmShqYSWB9SUoamF9IWsfugLOGkgZmd9t4Bshya9t1xeUGZjkeHTmuEuJJn6zOfeO6kv4QOZ6cahqYV0ZeTykSVubImNxHShoYinSWpqSB+Z2ka9kdcNZQ0sD8p208MQ+KtOmaLjcwy8HKNi4u9thKiOX/T7E7VDknRY4jt5oGZrfI66nVR2OZg5IGhrIspSlpYBCFhJ0I5EOxnZVLX7GNJ2Q9SedH2nRNlxuY5flI5NhK6lgTqFoj15F0fGTfS6hpYEqUgGibaj8l1CfCHFLCJKc+IWkz2/gUXhTpm1wi7qg0GBiqxNt9yaV97A6kYrX0sNXSoault3asQ1ZL29j9W4n9Ip2VU4yS5OBVkbZcs+UGZnl2jhxbaVEElErLO2VIdrcMZLnm+nJBZJ9LqWlgNi+QZZvkmKX5VGQ/cmlb2/gUyLllP5tTj7M7UICSK1wJ5F3X7kAKVkuH/V36ew1avaZY7lxQHt12Vk6Rgp2TjZpDqWD0hUyltq0+iHiGiySdE2otfUjSXyLvyyE3MMvDaiQuLvb4uhKjkIwK8btm1d8NMgcAXknSNSXdUNJdwjTNgZLOlHRpZP9Kq2lgeGoukY13+0abJTg5sg85hFHe2jY+BQLN7edzitiqJ4VCu6UoXRz0DEm3sTuxLKulN1gj0aHarnL7f6iibDuqhKjUzA30hSG4l4rOrFJqK2rSTJZlPz6y/VqEYfuRpC+G4X4u7nuH471zuMFsEC6usFXB8gZuYNLAEL49vlqEicDUsLT3tGCQD5P0hjDdwb6/IKQdIOEj/83wP8UjXy5p/1AnjEzErCBipIephNNDZtsfS/p1xRXXbd4c9t++J7V4ECnFWgV/s5iEtlNIT4h8voR4mGB1IOcv9xUC7e29Y5a4rzCSiTFfic9H2i8hHg7eEoKXufc9PMRe2WOZJt5PHqvL6LuB2SXSQX3RJeEYPhh5rYT+GC4eZ0v6eEg1z8WfZX33ChfPTVr+GCaUzF/jBiYNG0v6beQYXd3LGhgCn+17cihH9fAYjDrYtnOJqcC20xiYAPv5vohR8Q3tAUXInVcop46cHETfDQyjAPbg+iJGcdYPIxz2tVwiYOzJoSYOTyPc9FPBKMz3I23mkhuYdDCyZo/R1b2sgWGqq9QIJ/mock7f3aOwcaaOXFtuHfl8X/SrMCq+EgdFPtsX8bB9GX03MExhlPpBpxbL2G5ZMGaEzKssnc1F6YBqNzDpwMx2taTaNV3WwEDJ4EserpiWI6A5FWyLlBQlSzIgpsDbwu/hT5Ft9EHEU7YxMKwMsp/tiwZjYLhpnRc5wD6Im+ADIn/PpcNt5yWkdDA1cgOTltIGtK/6apj6oMaLfS21YgamZI6SiTAbxAwdEVboEGuxQ1gCT9wbK6SoTcW/19Oa5aQ8nDHKQrzcc8JNh4KUXQVHc41qC7E5P4hsow9qa2BqWIG4qAZjYODTkQPsgxjSLBnAS5xLSpgyum8IrrRtlZAbmLSsXbD/+qxJQcAvRV5LrZiBYSVN6dGLWWIEmdEKShHwL6t9ahwVv53tyBXoOkfSomprYLYM35X9fB80KANTMhtvSjEUTHVb+/dc4mTdc8El4JgVAsNuHqqnMn/KyhDbRkm5gUkPqwHssbour0m6fRJb2tdSK2ZggIcR+17XdDGawqjKPBDIbLfTB7U1MFcsHLOYUoMyMIwC2APsgxiBeUzk77nF0PcJoTgcy1GZOuDHyr+vDoaQZadHhacQlpyS56W2XDVuYPLwgcjxutboG41+6tLAkLPGvtc1XVzb5oUpMrudPqitgYF3Rj7fBw3KwJD8p8tsmYuKm2Cf5yG7lhuYPJDYra9xZbnVLLzXpYGBUyLvd/2rmNaiEOe8kD6iRJxTas1jYPp6/xmUgQFGC+xB1i5qUZCZsKugtlwi2RbBevbvqeUGJh/U3ak1uVtXIsaDvEgTujYw20Xe7/pXkTRtUQ6JbK92zWNgKN1R28h6Gw3OwNwtcpC1iyWKlBlfFXmtr2KqCYi1sa+llhuYvDw3ctxj1ptN/3RtYKCPN9iSIidK03TOCw+Ydpu1ax4DA2S2ttuoXYMzMFDigpJS5GW5Qo9XUcVEdXAokZHXDUx+Do4c+xjF6Mumpm9KXG9WMjCsHOvrct8SYpHEsvRtqm5eA0NQet9GWwdpYErmVEkhbrZAPSX7Wh/Fj2CS8MoNzHD4r8jxj02vsJ1SiYGBO1a6bLlrcd6moG8B0/MaGOBaardTswZpYOCTkYOtVdxsWZ5MevC+OeCYWLE0wQ3McGC55ZhNDLFqV7GdUpGBAcqD2M+OWaR4aFv3qA1d1atbRIsYGIKcGWW026pVgzUwJOcpWV9jGXGzneRkOTXyet9EjpgJbmCGRx8D5VNo2kWpJgMDfc2HlVpcA8gOnBJiFS+KtFWjFjEw0CcTPFgDAyRaswdco/ihsQQc+hiE3NSbzHfgBmaYvDbSF0PWJKYrRm0GBlhxY7cxJvH739Z2SiJ2jLRXoxY1MHB0ZHs1atAGBihAZg+6NjUNDHwo8p4+iJu5rWrtBma4EBj550ifDE0fswduqNHAAIUS7XbGIBKDXt92RmKeEWm3Ni1jYJgq/Xxkm7Vp8AYGXho58JpkDQwJxM6PvK9mXTKlUq0bmGHD8tKzI/0yFLHyxJpyS60GBp49kLi6tvrwEjftedk70n5NWsbAALlhuqpv11ajMDCwe8Vl0a2BgTv16OmWfp32hbmBGT7Eb71xgDfK41uYF6jZwAC/zR9GtjkkcQ3iWlOaXSqOtVzWwAAjMe+KbLsWjcbAAFVIqWFiO6FrxQwMkN6ZCq/2/TWJBFH3tDvewA3MeLhDT4ad24jpl7bUbmCAAqx9TFTWRuTPuoU94IKwaOGsyH51rRQGZgJTZjUatVEZGMBRvqyypWLTDAzQERdGPlODmGu+md1hgxuY8bFr6BfbV33QTyQ92B7QCvTBwEy4x0BWOiLOMUZAaoAUA/tK+k1kP7tSSgMDpPkgRYZtp0uNzsBMIMjroEpc5SwDA9eTdFLkc12KE4fsnyvhBmacUABvD0lfi/RZjfprKBHASMW89MnATHhIDzPLTvT1EBLAOVYbpO9g9I6RabvfpZXawEy4T0X3o9EamAlbSNpL0pmRzimllQzMBG4IPCHaz5fU6eEpri1uYJz7SzpO0u8i/de1mKJ9j8ldNC99NDATdpD09h5UHWfE/NiQZZ2kn7VzHUnPlPSFDmPDchmYCWR+PrDjSt2jNzBNmEd9erjYUlekVBAto0BtRjOAyHBWFpBh0m4nl3g6JbPxTnZnWvDiyPZSi++rCWaw1Mgadaycdmweinvy9Nb1UDu/b3LZpMgVQoZeu/3UWsZgtWG9kDcLM3dupP0uxDlyoqSnhQyxfQXzSXI4slh/r+Bikr8tOKI4L1xvuWG/MqxaKrmClqSal7FaOiRiJLrSvS/fReVhTpMsjgyXke/iJSEI7n3hSeCEcCFOIbYZS1E+C/aPTiJhFRfQ1C7/15JODksFmftcFC6K9nhTi7nnJvQlfWrfl0M8vTrzQ0ZTgtSZtjmjQJwXy/y/FLLUEnQ+7+9tFhS6tOdFajFSXApuSIzMMHpKzAMrmC6N9GlqXRBGeJmCIQ7JFs0cAly3+S45B5kG4wHv0HC9Iv/XxyPf/aJie+vYHSgApRsw3A8NAwL7Szpc0jHhfOJh2O7ronrWpNHV0h6rpZMqUZdB5b2DHwWVRAmefH1Y/sk8MU9SPMUwgtIs8obZ4YLEkP4qSd+V9KlwM2Z0Bze9sW3EcTKyvqTtJe0WnuSYFmRFE1N0TAdyHjPdw1Nl86bHuczfmGLABP1Y0pdD8jmGt3l653we4s2wFMSaEDNIBlpWoxA7yI2IaXfMDU/cjHja60zz+/lDSMHPNYlrE9cblufyYEgg7nZhdNlxHOcyeMrcJAQBbxNWDCESzm0t6dph6qoPc8rOeCHPDOcxAZLcSJn24QmPc5n/5m/EHGCCagzsHDJrhad8RtS4zjBay5QJT6A3Ddcavp/NwveTcuTLcarlH2w/lnMTNz1nAAAAAElFTkSuQmCC");
+  --logo-paper: url("data:image/png;base64,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");
+}
+
+* { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--body);
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+a { color: inherit; text-decoration: none; }
+img, svg { max-width: 100%; display: block; }
+
+h1, h2, h3, h4 {
+  font-family: var(--display);
+  font-weight: 600;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  margin: 0 0 .4em;
+  text-wrap: balance;
+}
+p { margin: 0 0 1em; }
+p:last-child { margin-bottom: 0; }
+
+.container {
+  width: 100%;
+  max-width: var(--container);
+  margin: 0 auto;
+  padding-inline: var(--gutter);
+}
+.muted { color: var(--muted); }
+.section-dark .muted { color: var(--muted-dark); }
+
+/* Anillo de foco único para todo el sitio. Sólo aparece con teclado. */
+:focus-visible { outline: 2px solid var(--accent-deep); outline-offset: 3px; }
+.section-dark :focus-visible, .site-footer :focus-visible { outline-color: var(--lime); }
+
+/* ---------- Logo ---------- */
+/* Caja de proporción fija: nunca provoca desplazamiento al cargar. */
+.logo { display: inline-flex; align-items: center; max-width: 100%; flex-shrink: 0; }
+.logo-mark {
+  display: block;
+  width: clamp(148px, 12.5vw, 176px);
+  aspect-ratio: 560 / 100;
+  max-width: 100%;
+  background: var(--logo-ink) center / contain no-repeat;
+}
+.site-footer .logo-mark {
+  width: clamp(180px, 26vw, 320px);
+  background-image: var(--logo-paper);
+}
+
+/* ---------- Botones ---------- */
+.btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 15px 28px;
+  border-radius: 999px;
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: 15px;
+  line-height: 1.2;
+  border: 1px solid transparent;
+  cursor: pointer;
+  text-align: center;
+  white-space: nowrap;
+  transition: background .3s var(--ease), color .3s var(--ease),
+              border-color .3s var(--ease), transform .3s var(--ease);
+}
+.btn .arw { transition: transform .35s var(--ease-out); display: inline-block; }
+.btn:hover .arw { transform: translateX(5px); }
+
+.btn-primary { background: var(--ink); color: var(--paper); }
+.btn-primary:hover { background: var(--accent-deep); }
+.btn-outline { background: transparent; color: var(--ink); border-color: var(--line-mid); }
+.btn-outline:hover { border-color: var(--ink); }
+.btn-light { background: var(--paper); color: var(--ink); }
+.btn-light:hover { background: var(--lime); }
+.section-dark .btn-outline, .site-footer .btn-outline { color: var(--paper); border-color: var(--line-dark-mid); }
+.section-dark .btn-outline:hover, .site-footer .btn-outline:hover { border-color: var(--paper); }
+
+/* WhatsApp es la vía alternativa, no la principal: contorno con el icono en
+   verde de marca. Un botón verde macizo con texto blanco no alcanza AA y
+   además competiría con el CTA principal. */
+.btn-wa { background: transparent; color: var(--ink); border-color: var(--line-mid); }
+.btn-wa:hover { border-color: var(--ink); }
+.btn-wa svg { width: 18px; height: 18px; fill: var(--wa); flex-shrink: 0; }
+.section-dark .btn-wa { color: var(--paper); border-color: var(--line-dark-mid); }
+.section-dark .btn-wa:hover { border-color: var(--paper); }
+
+/* Enlace de texto con flecha: la unidad mínima de acción del sistema. */
+.link {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: 15px;
+  padding-bottom: 5px;
+  border-bottom: 1px solid var(--line-mid);
+  transition: gap .35s var(--ease-out), color .3s var(--ease), border-color .3s var(--ease);
+}
+.link:hover { gap: 16px; color: var(--accent-deep); border-color: var(--accent-deep); }
+.section-dark .link { border-color: var(--line-dark-mid); }
+.section-dark .link:hover { color: var(--lime); border-color: var(--lime); }
+
+/* ---------- Skip link ---------- */
+.skip-link {
+  position: absolute;
+  top: -80px; left: 12px;
+  z-index: 200;
+  background: var(--ink);
+  color: var(--paper);
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: 14px;
+  padding: 12px 20px;
+  border-radius: 0 0 10px 10px;
+  transition: top .2s var(--ease);
+}
+.skip-link:focus { top: 0; }
+main:focus { outline: none; }
+
+/* ---------- Header ---------- */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(250, 249, 246, 0.9);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--line);
+  transition: box-shadow .3s var(--ease);
+}
+.is-scrolled .site-header { box-shadow: 0 6px 24px -18px rgba(11, 11, 14, 0.5); }
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 13px var(--gutter);
+  max-width: var(--container);
+  margin: 0 auto;
+}
+.nav-links { display: flex; align-items: center; gap: 30px; list-style: none; margin: 0; padding: 0; }
+.nav-links a {
+  position: relative;
+  font-family: var(--display);
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--muted);
+  transition: color .25s var(--ease);
+}
+.nav-links a::after {
+  content: "";
+  position: absolute;
+  left: 0; right: 0; bottom: -7px;
+  height: 2px;
+  background: var(--accent);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform .4s var(--ease-out);
+}
+.nav-links a:hover { color: var(--ink); }
+.nav-links a:hover::after { transform: scaleX(1); }
+.nav-links a[aria-current="page"] { color: var(--ink); }
+.nav-links a[aria-current="page"]::after { transform: scaleX(1); }
+.nav-right { display: flex; align-items: center; gap: 14px; }
+.nav-right .btn-primary { padding: 11px 22px; font-size: 14px; }
+
+.lang {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  font-family: var(--display);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+}
+.lang a { padding: 8px 7px; color: var(--muted); transition: color .25s var(--ease); }
+.lang a:hover { color: var(--ink); }
+.lang a.active { color: var(--ink); }
+.lang a + a { border-left: 1px solid var(--line-mid); }
+
+.nav-toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  width: 42px; height: 42px;
+  background: none; border: none; padding: 0;
+  cursor: pointer;
+}
+.nav-toggle span {
+  width: 22px; height: 2px;
+  background: var(--ink);
+  display: block;
+  transition: transform .35s var(--ease-out), opacity .2s var(--ease);
+}
+.nav.open .nav-toggle span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.nav.open .nav-toggle span:nth-child(2) { opacity: 0; }
+.nav.open .nav-toggle span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+/* ---------- Secciones ---------- */
+section { padding-block: var(--pad-m); }
+section.page { padding-block: 0; }
+.section-alt { background: var(--paper-dim); }
+.section-dark { background: var(--ink); color: var(--paper); }
+
+/* NIVEL 1 — entrada de página. Breve, nunca bloquea. */
+.page { display: none; opacity: 0; transform: translateY(10px); }
+.page.page-in {
+  opacity: 1;
+  transform: none;
+  transition: opacity .45s var(--ease-out), transform .45s var(--ease-out);
+}
+
+/* ---------- HERO ---------- */
+.hero { padding-block: clamp(30px, 4vw, 64px) 0; }
+.hero h1 {
+  font-size: clamp(38px, 7.4vw, 96px);
+  line-height: 0.98;
+  letter-spacing: -0.042em;
+  margin: 0 0 clamp(22px, 3vw, 38px);
+  max-width: 16ch;
+}
+.hero h1 .ln { display: block; }
+.hero h1 em { font-style: normal; color: var(--accent); }
+.hero-meta {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: clamp(24px, 4vw, 56px);
+  align-items: end;
+  padding-bottom: clamp(24px, 3vw, 38px);
+}
+.hero-lead {
+  font-size: clamp(16px, 1.55vw, 19px);
+  line-height: 1.55;
+  color: var(--muted);
+  max-width: 48ch;
+  margin: 0;
+}
+.hero-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+
+/* Índice de capacidades: la tabla de contenidos de la oferta. */
+.index { border-top: 1px solid var(--line-mid); margin: 0; padding: 0; list-style: none; }
+.index li { border-bottom: 1px solid var(--line); }
+.idx {
+  position: relative;
+  display: grid;
+  grid-template-columns: clamp(44px, 5vw, 72px) minmax(0, 1fr) auto;
+  align-items: center;
+  gap: clamp(10px, 2vw, 24px);
+  padding: clamp(18px, 2.4vw, 30px) 0;
+  transition: padding-left .45s var(--ease-out), opacity .4s var(--ease);
+}
+.idx::before {
+  content: "";
+  position: absolute;
+  left: 0; bottom: -1px;
+  height: 2px; width: 100%;
+  background: var(--accent);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform .55s var(--ease-out);
+}
+.idx:hover, .idx.is-active { padding-left: clamp(10px, 1.6vw, 20px); }
+.idx:hover::before, .idx.is-active::before { transform: scaleX(1); }
+.index:hover li:not(:hover) .idx,
+.index.has-active li:not(.is-active) .idx { opacity: .4; }
+.idx-num {
+  font-family: var(--display);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  color: var(--muted);
+  transition: color .35s var(--ease);
+}
+.idx:hover .idx-num, .idx.is-active .idx-num { color: var(--accent-deep); }
+.idx-name {
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: clamp(28px, 5vw, 62px);
+  letter-spacing: -0.038em;
+  line-height: 1;
+  transition: color .35s var(--ease);
+}
+.idx:hover .idx-name, .idx.is-active .idx-name { color: var(--accent); }
+.idx-cue {
+  justify-self: end;
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  font-family: var(--display);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent-deep);
+  opacity: 0;
+  transform: translateX(-12px);
+  transition: opacity .4s var(--ease), transform .4s var(--ease-out);
+}
+.idx-cue span:last-child { font-size: 18px; letter-spacing: 0; }
+.idx:hover .idx-cue, .idx.is-active .idx-cue { opacity: 1; transform: none; }
+
+/* ---------- Marquee ---------- */
+/* Animación CSS pura, continua y ajena a todo lo demás: no se pausa en hover,
+   no la toca el scroll, no depende de IntersectionObserver ni de visibilidad.
+   El único freno es prefers-reduced-motion. El bucle es perfecto porque la
+   pista contiene dos grupos idénticos y el keyframe recorre exactamente -50%. */
+.marquee {
+  overflow: hidden;
+  background: var(--ink);
+  color: var(--paper);
+  padding-block: clamp(14px, 1.6vw, 20px);
+  border-block: 1px solid var(--line-dark);
+}
+.marquee-track {
+  display: flex;
+  width: max-content;
+  align-items: center;
+  animation: marquee 34s linear infinite;
+  will-change: transform;
+}
+.marquee-group { display: flex; align-items: center; flex-shrink: 0; }
+.marquee-group span {
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: clamp(15px, 1.7vw, 22px);
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+  padding: 0 clamp(14px, 1.8vw, 24px);
+  white-space: nowrap;
+}
+.marquee-group i { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); flex-shrink: 0; }
+@keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+/* ---------- Propuesta de valor ---------- */
+/* Tres movimientos, no tres tarjetas. Los dos primeros exponen; el tercero es
+   la conclusión y por eso se invierte a fondo oscuro: es lo que diferencia
+   a Targett y debe leerse como el remate de la sección. */
+.value { border-top: 1px solid var(--line-mid); }
+.value-row {
+  display: grid;
+  grid-template-columns: clamp(44px, 5vw, 72px) minmax(0, 0.9fr) minmax(0, 1.1fr);
+  gap: clamp(12px, 2.4vw, 32px);
+  align-items: start;
+  padding: clamp(20px, 2.6vw, 34px) 0;
+  border-bottom: 1px solid var(--line);
+}
+.value-num {
+  font-family: var(--display);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  color: var(--accent-deep);
+  padding-top: .5em;
+}
+.value-row h2 {
+  font-size: clamp(28px, 4.4vw, 56px);
+  letter-spacing: -0.04em;
+  margin: 0;
+}
+.value-row p { color: var(--muted); font-size: clamp(15px, 1.45vw, 18px); max-width: 46ch; margin: 0; }
+
+/* La fila clave se invierte a fondo oscuro, pero sus columnas tienen que caer
+   exactamente donde las de las filas de arriba. El margen negativo saca el
+   fondo hasta el borde del contenedor y el padding devuelve el contenido a su
+   sitio: la rejilla queda alineada y la banda oscura se lee a sangre. */
+.value-row--key {
+  background: var(--ink);
+  color: var(--paper);
+  border-bottom: none;
+  margin-inline: calc(-1 * var(--gutter));
+  padding-inline: var(--gutter);
+  margin-top: 0;
+}
+.value-row--key .value-num { color: var(--accent); }
+.value-row--key p { color: var(--muted-dark); }
+.value-row--key h2 em { font-style: normal; color: var(--accent); }
+
+/* Diagrama de convergencia: dos trazos que se unen en uno. Es la idea de la
+   marca dibujada, no un icono decorativo. */
+.converge { margin-top: clamp(18px, 2.4vw, 28px); width: 100%; max-width: 420px; height: auto; }
+.converge .cv-line { fill: none; stroke: var(--line-dark-mid); stroke-width: 1.5; }
+.converge .cv-join { fill: none; stroke: var(--accent); stroke-width: 2; stroke-dasharray: 260; stroke-dashoffset: 260; transition: stroke-dashoffset 1.1s var(--ease-out) .15s; }
+.value-row--key.in-view .converge .cv-join { stroke-dashoffset: 0; }
+.converge .cv-dot { fill: var(--accent); opacity: 0; transition: opacity .4s var(--ease) .9s; }
+.value-row--key.in-view .converge .cv-dot { opacity: 1; }
+.converge text { font-family: var(--display); font-size: 12px; font-weight: 700; letter-spacing: 0.12em; fill: var(--paper); text-transform: uppercase; }
+
+/* ---------- Servicios (síntesis en el inicio) ---------- */
+.duo { display: grid; grid-template-columns: 1fr 1fr; border-top: 1px solid var(--line-mid); }
+.svc {
+  position: relative;
+  display: block;
+  padding: clamp(26px, 3vw, 40px) clamp(24px, 3vw, 44px) clamp(26px, 3vw, 40px) 0;
+  border-bottom: 1px solid var(--line);
+  transition: background .45s var(--ease), opacity .4s var(--ease);
+}
+.svc + .svc { border-left: 1px solid var(--line); padding-left: clamp(24px, 3vw, 44px); }
+.svc::after {
+  content: "";
+  position: absolute;
+  left: 0; bottom: -1px;
+  height: 2px; width: 100%;
+  background: var(--accent);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform .55s var(--ease-out);
+}
+.svc:hover, .svc.is-active { background: rgba(11, 11, 14, 0.035); }
+.svc:hover::after, .svc.is-active::after { transform: scaleX(1); }
+.duo.has-active .svc:not(.is-active), .duo:hover .svc:not(:hover) { opacity: .48; }
+.svc-num {
+  display: block;
+  font-family: var(--display);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  color: var(--accent-deep);
+  margin-bottom: 14px;
+}
+.svc h2 { font-size: clamp(24px, 3vw, 36px); margin: 0 0 12px; transition: transform .45s var(--ease-out); }
+.svc:hover h2, .svc.is-active h2 { transform: translateX(5px); }
+.svc p { color: var(--muted); max-width: 40ch; margin: 0 0 18px; }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; list-style: none; margin: 0; padding: 0; }
+.chips li {
+  font-family: var(--display);
+  font-size: 12px;
+  font-weight: 600;
+  padding: 6px 13px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  color: var(--muted);
+  opacity: .4;
+  transform: translateY(6px);
+  transition: opacity .45s var(--ease), transform .45s var(--ease-out),
+              border-color .3s var(--ease), color .3s var(--ease);
+}
+.svc:hover .chips li, .svc.is-active .chips li {
+  opacity: 1; transform: none; border-color: var(--line-mid); color: var(--ink);
+}
+.svc .chips li:nth-child(1) { transition-delay: .02s; }
+.svc .chips li:nth-child(2) { transition-delay: .05s; }
+.svc .chips li:nth-child(3) { transition-delay: .08s; }
+.svc .chips li:nth-child(4) { transition-delay: .11s; }
+.svc .chips li:nth-child(5) { transition-delay: .14s; }
+.svc .chips li:nth-child(6) { transition-delay: .17s; }
+.svc .chips li:nth-child(7) { transition-delay: .20s; }
+.svc-cue {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  margin-top: 20px;
+  font-family: var(--display);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent-deep);
+  opacity: 0;
+  transform: translateX(-10px);
+  transition: opacity .45s var(--ease) .08s, transform .45s var(--ease-out) .08s;
+}
+.svc-cue span:last-child { font-size: 17px; letter-spacing: 0; }
+.svc:hover .svc-cue, .svc.is-active .svc-cue { opacity: 1; transform: none; }
+
+/* ---------- El sistema (web + pauta) ---------- */
+/* Columna izquierda fija mientras la derecha avanza: el argumento se sostiene
+   mientras el visitante recorre el ciclo. La línea se llena con el scroll. */
+.system-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+  gap: clamp(30px, 5vw, 80px);
+  align-items: start;
+}
+.system-aside { position: sticky; top: clamp(96px, 12vh, 140px); }
+.system-aside h2 {
+  font-size: clamp(28px, 3.6vw, 46px);
+  letter-spacing: -0.035em;
+  margin: 0 0 20px;
+  max-width: 15ch;
+}
+.system-aside p { color: var(--muted-dark); max-width: 34ch; margin: 0 0 26px; }
+.flow { position: relative; margin: 0; padding: 0 0 0 clamp(26px, 3vw, 38px); list-style: none; --p: 0; }
+.flow::before {
+  content: "";
+  position: absolute;
+  left: 5px; top: 10px; bottom: 10px;
+  width: 1px;
+  background: var(--line-dark);
+}
+.flow::after {
+  content: "";
+  position: absolute;
+  left: 5px; top: 10px; bottom: 10px;
+  width: 1px;
+  background: var(--accent);
+  transform: scaleY(var(--p));
+  transform-origin: top;
+  transition: transform .3s linear;
+}
+.flow li {
+  position: relative;
+  padding: clamp(13px, 1.7vw, 19px) 0;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 6px 16px;
+}
+.flow li::before {
+  content: "";
+  position: absolute;
+  left: calc(-1 * clamp(26px, 3vw, 38px));
+  top: clamp(19px, 2.2vw, 25px);
+  width: 11px; height: 11px;
+  margin-left: 0;
+  border-radius: 50%;
+  background: var(--ink);
+  border: 2px solid var(--line-dark-mid);
+  transition: background .4s var(--ease), border-color .4s var(--ease), transform .4s var(--ease-out);
+}
+.flow li.on::before { background: var(--accent); border-color: var(--accent); transform: scale(1.3); }
+.flow b {
+  font-family: var(--display);
+  font-size: clamp(17px, 1.9vw, 22px);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: var(--muted-dark);
+  transition: color .4s var(--ease);
+}
+.flow li.on b { color: var(--paper); }
+.flow em {
+  font-style: normal;
+  font-family: var(--display);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  color: var(--muted-dark);
+  grid-column: 1 / -1;
+  transition: color .4s var(--ease);
+}
+.flow li.on em { color: var(--accent); }
+.flow span { grid-column: 1 / -1; color: var(--muted-dark); font-size: 14.5px; }
+
+/* ---------- Principios ---------- */
+.principles { border-top: 1px solid var(--line-mid); }
+.principle {
+  position: relative;
+  display: grid;
+  grid-template-columns: clamp(44px, 5vw, 72px) minmax(0, 1fr) 40px;
+  gap: clamp(12px, 2vw, 24px);
+  align-items: start;
+  padding: clamp(22px, 2.8vw, 34px) clamp(10px, 1.4vw, 16px);
+  border-bottom: 1px solid var(--line);
+  transition: background .45s var(--ease), padding-left .45s var(--ease-out), opacity .4s var(--ease);
+}
+.principle::before {
+  content: "";
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 2px;
+  background: var(--accent);
+  transform: scaleY(0);
+  transform-origin: top;
+  transition: transform .45s var(--ease-out);
+}
+.principle:hover, .principle.is-active { background: rgba(11, 11, 14, 0.05); padding-left: clamp(20px, 2.4vw, 30px); }
+.principle:hover::before, .principle.is-active::before { transform: scaleY(1); }
+.principles.has-active .principle:not(.is-active) { opacity: .5; }
+.pr-num {
+  font-family: var(--display);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  color: var(--muted);
+  padding-top: .55em;
+  transition: color .4s var(--ease);
+}
+.principle:hover .pr-num, .principle.is-active .pr-num { color: var(--accent-deep); }
+.pr-body h2 {
+  font-size: clamp(24px, 3.2vw, 40px);
+  margin: 0 0 8px;
+  transform-origin: left center;
+  transition: transform .45s var(--ease-out);
+}
+.principle:hover .pr-body h3, .principle.is-active .pr-body h2 { transform: translateX(6px); }
+.pr-body p { color: var(--muted); margin: 0; max-width: 58ch; transition: color .4s var(--ease); }
+.principle:hover .pr-body p, .principle.is-active .pr-body p { color: var(--ink); }
+.pr-arw {
+  justify-self: end;
+  align-self: center;
+  font-family: var(--display);
+  font-size: 20px;
+  color: var(--muted);
+  opacity: 0;
+  transform: translateX(-10px);
+  transition: opacity .4s var(--ease), transform .4s var(--ease-out), color .4s var(--ease);
+}
+.principle:hover .pr-arw, .principle.is-active .pr-arw { opacity: 1; transform: none; color: var(--accent-deep); }
+.principle.touched .pr-arw { opacity: .55; transform: none; }
+
+/* ---------- Metodología ---------- */
+.method { position: relative; display: grid; grid-template-columns: repeat(5, 1fr); gap: 20px; padding-top: 34px; --p: 0; }
+.method-line { position: absolute; top: 6px; left: 0; right: 0; height: 1px; background: var(--line); }
+.method-line::after {
+  content: "";
+  position: absolute; inset: 0;
+  background: var(--accent);
+  transform: scaleX(var(--p));
+  transform-origin: left;
+  transition: transform .3s linear;
+}
+.step { position: relative; padding-right: 12px; }
+.step::before {
+  content: "";
+  position: absolute;
+  top: -34px; left: 0;
+  width: 11px; height: 11px;
+  border-radius: 50%;
+  background: var(--paper);
+  border: 2px solid var(--line-mid);
+  transition: background .4s var(--ease), border-color .4s var(--ease), transform .4s var(--ease-out);
+}
+.section-alt .step::before { background: var(--paper-dim); }
+.step.is-done::before { background: var(--accent); border-color: var(--accent); }
+.step.is-current::before, .step:hover::before { background: var(--accent); border-color: var(--accent); transform: scale(1.4); }
+.step-num {
+  display: block;
+  font-family: var(--display);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  color: var(--muted);
+  margin-bottom: 10px;
+  transition: color .4s var(--ease);
+}
+.step.is-done .step-num, .step.is-current .step-num { color: var(--accent-deep); }
+.step h3 {
+  font-size: clamp(17px, 1.85vw, 22px);
+  margin: 0 0 8px;
+  color: var(--muted);
+  transition: color .4s var(--ease), transform .4s var(--ease-out);
+}
+.step.is-done h3 { color: var(--ink); }
+.step.is-current h3, .step:hover h3 { color: var(--ink); transform: translateX(4px); }
+.step p { color: var(--muted); font-size: 14.5px; margin: 0; transition: color .4s var(--ease); }
+.step.is-current p, .step:hover p { color: var(--ink); }
+
+/* ---------- Declaración editorial (Nosotros) ---------- */
+.declare { padding-block: clamp(30px, 4vw, 62px) clamp(20px, 2.4vw, 30px); }
+.declare h1 {
+  font-size: clamp(38px, 8vw, 108px);
+  line-height: 0.96;
+  letter-spacing: -0.045em;
+  margin: 0 0 clamp(22px, 3vw, 38px);
+  max-width: none;
+}
+.declare h1 .ln { display: block; }
+.declare h1 .ln:last-child { color: var(--accent); }
+.declare-foot { display: grid; grid-template-columns: 1.05fr 0.95fr; gap: clamp(22px, 4vw, 56px); align-items: start; }
+.declare-sub {
+  font-family: var(--display);
+  font-size: clamp(18px, 2.1vw, 26px);
+  line-height: 1.26;
+  letter-spacing: -0.02em;
+  margin: 0;
+  max-width: 26ch;
+}
+.rule { display: block; height: 1px; background: var(--line); margin-top: clamp(28px, 3.4vw, 46px); transform-origin: left; }
+
+/* Bloque de síntesis: afirmación a la izquierda, desarrollo y acción a la
+   derecha, separados por la regla fina del sistema. */
+.split {
+  display: grid;
+  grid-template-columns: 1.05fr 0.95fr;
+  gap: clamp(26px, 4vw, 60px);
+  align-items: start;
+  padding-top: clamp(22px, 2.6vw, 34px);
+  border-top: 1px solid var(--line-mid);
+}
+.split h2 {
+  font-family: var(--display);
+  font-size: clamp(24px, 3.2vw, 40px);
+  line-height: 1.12;
+  letter-spacing: -0.03em;
+  margin: 0;
+  max-width: 17ch;
+}
+.split p { color: var(--muted); font-size: clamp(15px, 1.45vw, 17px); max-width: 44ch; margin: 0 0 24px; }
+
+.closing { font-family: var(--display); font-size: clamp(26px, 4.4vw, 58px); line-height: 1.06; letter-spacing: -0.038em; margin: 0; max-width: 20ch; }
+
+/* ---------- Cabecera de página interna ---------- */
+.lead-in { padding-block: clamp(26px, 3.2vw, 50px) clamp(14px, 1.8vw, 22px); }
+.lead-in h1 {
+  font-size: clamp(34px, 6vw, 78px);
+  line-height: 1.0;
+  letter-spacing: -0.04em;
+  margin: 0 0 clamp(18px, 2.2vw, 28px);
+  max-width: 15ch;
+}
+.lead-in h1 .ln { display: block; }
+.lead-in h1 .ln:last-child { color: var(--accent); }
+.lead-in p { color: var(--muted); font-size: clamp(16px, 1.55vw, 20px); max-width: 52ch; margin: 0; }
+
+/* ---------- Servicio en detalle ---------- */
+.detail { padding-block: var(--pad-m); }
+.detail-head {
+  display: flex;
+  align-items: baseline;
+  gap: 18px;
+  padding-bottom: 18px;
+  border-bottom: 1px solid var(--line-mid);
+  margin-bottom: clamp(18px, 2.2vw, 26px);
+}
+.detail-head h2 { font-size: clamp(30px, 5vw, 64px); margin: 0; letter-spacing: -0.042em; }
+.detail-body { display: grid; grid-template-columns: 0.82fr 1.18fr; gap: clamp(26px, 4.5vw, 64px); align-items: start; }
+.detail-intro { font-size: clamp(17px, 1.65vw, 21px); line-height: 1.5; color: var(--muted); margin: 0 0 24px; }
+.prompt {
+  font-family: var(--display);
+  font-size: clamp(16px, 1.5vw, 19px);
+  line-height: 1.3;
+  letter-spacing: -0.02em;
+  margin: 0 0 16px;
+  max-width: 26ch;
+}
+.caps { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line); }
+.caps li {
+  display: grid;
+  grid-template-columns: 0.7fr 1.3fr;
+  gap: 20px;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--line);
+  transition: padding-left .35s var(--ease-out), background .35s var(--ease);
+}
+.caps li:hover { padding-left: 12px; background: rgba(11, 11, 14, 0.03); }
+.caps b { font-family: var(--display); font-weight: 600; font-size: 15px; }
+.caps span { color: var(--muted); font-size: 14.5px; }
+
+/* ---------- FAQ ---------- */
+.faq { border-top: 1px solid var(--line-mid); }
+.faq-item { border-bottom: 1px solid var(--line); }
+.faq-h { margin: 0; }
+.faq-q {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding: clamp(20px, 2.4vw, 28px) 4px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: clamp(17px, 2vw, 24px);
+  letter-spacing: -0.022em;
+  line-height: 1.24;
+  color: var(--ink);
+  transition: padding-left .35s var(--ease-out), color .3s var(--ease);
+}
+.faq-q:hover { padding-left: 14px; color: var(--accent-deep); }
+.plus {
+  position: relative;
+  flex-shrink: 0;
+  width: 20px; height: 20px;
+  transition: transform .4s var(--ease-out);
+}
+.plus::before, .plus::after {
+  content: "";
+  position: absolute;
+  top: 50%; left: 50%;
+  background: var(--muted);
+  transition: background .3s var(--ease), opacity .3s var(--ease);
+}
+.plus::before { width: 18px; height: 1.5px; transform: translate(-50%, -50%); }
+.plus::after { width: 1.5px; height: 18px; transform: translate(-50%, -50%); }
+.faq-q:hover .plus::before, .faq-q:hover .plus::after { background: var(--accent-deep); }
+.faq-item.open .faq-q { color: var(--accent-deep); }
+.faq-item.open .plus { transform: rotate(135deg); }
+.faq-item.open .plus::before, .faq-item.open .plus::after { background: var(--accent-deep); }
+/* visibility oculta la respuesta cerrada también para lectores de pantalla:
+   con sólo max-height:0 el texto seguía anunciándose. */
+.faq-a { max-height: 0; overflow: hidden; visibility: hidden; transition: max-height .4s var(--ease-out), visibility 0s linear .4s; }
+.faq-item.open .faq-a { visibility: visible; transition: max-height .4s var(--ease-out), visibility 0s; }
+.faq-a-in { padding: 0 4px clamp(20px, 2.4vw, 28px); color: var(--muted); max-width: 62ch; font-size: 15.5px; }
+
+/* ---------- CTA final ---------- */
+/* El punto más alto de la página: tipografía a máxima escala, una sola acción
+   principal y WhatsApp como alternativa evidente pero secundaria. */
+/* El CTA y el pie son ambos oscuros y van pegados: si cada uno guarda su
+   propio respiro completo, entre el final del contenido y el pie queda una
+   franja negra vacía enorme. El CTA abre con aire y cierra corto. */
+.cta { padding-block: clamp(40px, 4.8vw, 72px) clamp(30px, 3.4vw, 46px); }
+.cta h2 {
+  font-size: clamp(40px, 8.4vw, 116px);
+  line-height: 0.94;
+  letter-spacing: -0.046em;
+  margin: 0 0 clamp(18px, 2.2vw, 26px);
+  max-width: 14ch;
+}
+.cta h2 em { font-style: normal; color: var(--accent); }
+.cta-foot {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: clamp(24px, 4vw, 56px);
+  align-items: end;
+  padding-top: clamp(20px, 2.4vw, 30px);
+  border-top: 1px solid var(--line-dark);
+}
+.cta-foot p { color: var(--muted-dark); max-width: 40ch; margin: 0; font-size: clamp(15px, 1.45vw, 17px); }
+.cta-actions { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
+.cta-actions .btn-light { padding: 17px 34px; font-size: 16px; }
+
+/* ---------- Contacto ---------- */
+/* Contacto: una sola sección. El formulario comparte el eje izquierdo con el
+   título y la entradilla, y se limita a una medida legible para que el bloque
+   se lea encuadrado y no como una pieza suelta debajo. */
+.contact { padding-bottom: var(--pad-m); }
+.contact-form { max-width: 660px; margin-top: clamp(26px, 3.2vw, 44px); }
+
+form.form { display: grid; gap: clamp(16px, 2vw, 22px); }
+form.form button[type="submit"] { justify-self: start; }
+.row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+.field { display: grid; gap: 7px; }
+.field label {
+  font-family: var(--display);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-weight: 600;
+  color: var(--muted);
+  transform-origin: left center;
+  transition: color .3s var(--ease), transform .3s var(--ease-out);
+}
+.field:focus-within label { color: var(--accent-deep); transform: translateX(3px); }
+.field.filled label { color: var(--ink); }
+.field input, .field select, .field textarea {
+  border: 1px solid transparent;
+  border-bottom: 1px solid var(--line-mid);
+  border-radius: 0;
+  padding: 12px 2px;
+  font-family: var(--body);
+  font-size: 15.5px;
+  background: var(--paper);
+  color: var(--ink);
+  resize: vertical;
+  transition: border-color .25s var(--ease);
+}
+.field select {
+  appearance: none; -webkit-appearance: none; padding-right: 26px;
+  background-image: linear-gradient(45deg, transparent 50%, var(--muted) 50%), linear-gradient(135deg, var(--muted) 50%, transparent 50%);
+  background-position: calc(100% - 11px) calc(50% + 1px), calc(100% - 6px) calc(50% + 1px);
+  background-size: 5px 5px, 5px 5px;
+  background-repeat: no-repeat;
+}
+.field input:focus, .field select:focus, .field textarea:focus {
+  outline: none;
+  border-bottom-color: var(--accent-deep);
+  box-shadow: 0 1px 0 0 var(--accent-deep);
+}
+.field input:focus-visible, .field select:focus-visible, .field textarea:focus-visible { outline: none; }
+.hint { font-size: 12.5px; color: var(--muted); margin: 3px 0 0; }
+.note { font-size: 13px; color: var(--muted); margin: 0; max-width: 52ch; }
+/* Aviso honesto: nunca afirma que el mensaje se envió. */
+.notice {
+  display: none;
+  background: var(--paper-dim);
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--accent);
+  padding: 15px 17px;
+  border-radius: 10px;
+  font-size: 14px;
+}
+.notice.show { display: block; }
+.notice a { text-decoration: underline; }
+
+/* ---------- Footer ---------- */
+.site-footer { background: var(--ink); color: var(--paper); padding-block: clamp(26px, 3vw, 42px) 20px; }
+.footer-top {
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+  gap: clamp(30px, 5vw, 72px);
+  align-items: start;
+  padding-bottom: clamp(26px, 3vw, 40px);
+}
+.footer-brand p { color: var(--muted-dark); max-width: 30ch; margin: clamp(18px, 2.2vw, 26px) 0 0; font-size: 15.5px; }
+.footer-contact { display: grid; gap: 14px; justify-items: start; }
+.footer-contact .lbl {
+  font-family: var(--display);
+  font-size: 11px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.16em;
+  color: var(--muted-dark);
+  margin-bottom: 2px;
+}
+.footer-contact a { font-size: clamp(16px, 1.7vw, 20px); font-family: var(--display); font-weight: 500; letter-spacing: -0.015em; border-bottom: 1px solid var(--line-dark-mid); padding-bottom: 3px; transition: color .25s var(--ease), border-color .25s var(--ease); }
+.footer-contact a:hover { color: var(--lime); border-color: var(--lime); }
+.footer-contact span { color: var(--muted-dark); font-size: 15px; }
+.footer-bottom {
+  border-top: 1px solid var(--line-dark);
+  padding-top: 22px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 14px 28px;
+  color: var(--muted-dark);
+  font-size: 13.5px;
+}
+
+/* ---------- WhatsApp flotante ---------- */
+.wa-float {
+  position: fixed;
+  right: 22px; bottom: 22px;
+  width: 54px; height: 54px;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--wa);
+  color: #fff;
+  border-radius: 50%;
+  /* El anillo oscuro da al botón un borde con contraste suficiente sobre el
+     fondo claro; el verde solo no lo tiene. */
+  box-shadow: 0 0 0 1px rgba(11, 11, 14, 0.22), 0 10px 26px rgba(0, 0, 0, 0.18);
+  z-index: 90;
+  transition: transform .3s var(--ease-out), box-shadow .3s var(--ease);
+}
+.wa-float svg { width: 26px; height: 26px; fill: currentColor; }
+.wa-float:hover { transform: translateY(-3px) scale(1.05); }
+
+/* ---------- NIVEL 2 — reveal de secciones ---------- */
+[data-reveal] { opacity: 0; transform: translateY(20px); transition: opacity .6s var(--ease-out), transform .6s var(--ease-out); }
+[data-reveal].in-view { opacity: 1; transform: none; }
+[data-reveal="clip"] { opacity: 1; transform: none; clip-path: inset(0 0 108% 0); transition: clip-path .75s var(--ease-out); }
+[data-reveal="clip"].in-view { clip-path: inset(0 0 -12% 0); }
+[data-reveal="rule"] { opacity: 1; transform: scaleX(0); transform-origin: left; transition: transform .8s var(--ease-out); }
+[data-reveal="rule"].in-view { transform: scaleX(1); }
+[data-d="1"] { transition-delay: .06s; }
+[data-d="2"] { transition-delay: .12s; }
+[data-d="3"] { transition-delay: .18s; }
+[data-d="4"] { transition-delay: .24s; }
+
+/* ---------- Táctil: nada de valor depende de :hover ---------- */
+@media (hover: none) {
+  .chips li { opacity: 1; transform: none; border-color: var(--line-mid); color: var(--muted); }
+  .svc-cue, .idx-cue { opacity: .9; transform: none; }
+  .duo:hover .svc:not(:hover) { opacity: 1; }
+  .index:hover li:not(:hover) .idx { opacity: 1; }
+  .caps li:hover { padding-left: 0; background: none; }
+  .pr-arw { opacity: .55; transform: none; }
+  .btn:hover, .wa-float:hover { transform: none; }
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 1024px) {
+  .system-grid { grid-template-columns: 1fr; gap: 32px; }
+  .system-aside { position: static; }
+  .system-aside h2, .system-aside p { max-width: none; }
+  .detail-body { grid-template-columns: 1fr; gap: 26px; }
+  .method { grid-template-columns: repeat(3, 1fr); gap: 30px 20px; }
+  .footer-top { grid-template-columns: 1fr; gap: 34px; }
+}
+
+@media (max-width: 900px) {
+  .hero-meta { grid-template-columns: 1fr; align-items: start; }
+  .hero h1 { max-width: none; }
+  .hero-lead { max-width: none; }
+  .declare-foot { grid-template-columns: 1fr; gap: 18px; }
+  .split { grid-template-columns: 1fr; gap: 20px; }
+  .split h2 { max-width: 20ch; }
+  .value-row { grid-template-columns: clamp(40px, 6vw, 60px) minmax(0, 1fr); }
+  /* El texto y el bloque con el diagrama bajan a la segunda columna: si
+     cayeran en la primera (la del número) se estrangularían. */
+  .value-row p, .value-row > div { grid-column: 2; }
+  .caps li { grid-template-columns: 0.9fr 1.1fr; }
+  .cta-foot { grid-template-columns: 1fr; align-items: start; }
+}
+
+@media (max-width: 720px) {
+  .nav-links, .nav-right .lang { display: none; }
+  .nav-toggle { display: flex; }
+  .nav.open .nav-links {
+    display: flex;
+    position: absolute;
+    top: 100%; left: 0; right: 0;
+    background: var(--paper);
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 18px var(--gutter) 24px;
+    border-bottom: 1px solid var(--line);
+    gap: 4px;
+  }
+  .nav.open .nav-links a { padding: 10px 0; font-size: 19px; letter-spacing: -0.02em; }
+  /* Con el menú abierto el selector de idioma ocupa el sitio del CTA: así la
+     barra nunca desborda en pantallas de 320 px. */
+  .nav.open .nav-right .lang { display: flex; }
+  .nav.open .nav-right .btn-primary { display: none; }
+
+  section { padding-block: var(--pad-s); }
+  .hero { padding-block: 22px 0; }
+  .declare { padding-block: 24px 18px; }
+  .lead-in { padding-block: 22px 12px; }
+  .cta { padding-block: 40px; }
+
+  .duo { grid-template-columns: 1fr; }
+  .svc { padding-right: 0; }
+  .svc + .svc { border-left: 0; padding-left: 0; }
+  .caps li { grid-template-columns: 1fr; gap: 5px; }
+  .method { grid-template-columns: 1fr; gap: 0; padding-top: 0; padding-left: 26px; }
+  .method-line { top: 0; bottom: 0; left: 5px; right: auto; width: 1px; height: auto; }
+  .method-line::after { transform: scaleY(var(--p)); transform-origin: top; }
+  .step { padding: 15px 0; }
+  .step::before { top: 19px; left: -26px; }
+  .row2 { grid-template-columns: 1fr; }
+  form.form button[type="submit"] { justify-self: stretch; }
+  .footer-nav { gap: 20px; }
+  .value-row--key { padding-inline: 18px; }
+  .site-footer { padding-bottom: 96px; }
+  .wa-float { right: 14px; bottom: 14px; }
+}
+
+/* Teléfonos estrechos: la barra tiene que caber en una línea sin encoger el
+   logo hasta hacerlo ilegible. Se recorta primero el CTA, no la marca. */
+@media (max-width: 560px) {
+  .logo-mark { width: 132px; }
+  .nav-right { gap: 8px; }
+  .nav-right .btn-primary { padding: 10px 16px; font-size: 13px; }
+  .nav-right .btn-primary .arw { display: none; }
+}
+
+@media (max-width: 420px) {
+  .logo-mark { width: 118px; }
+  .nav-right .btn-primary { padding: 10px 13px; }
+  .nav-toggle { width: 38px; }
+  .idx { grid-template-columns: 34px minmax(0, 1fr) auto; gap: 8px; }
+  .idx-cue span:first-child { display: none; }
+  .hero-actions .btn, .cta-actions .btn { width: 100%; }
+  .footer-bottom { flex-direction: column; align-items: flex-start; }
+}
+
+/* ---------- Reduced motion ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track { animation: none; }
+  [data-reveal] { opacity: 1; transform: none; transition: none; }
+  [data-reveal="clip"] { clip-path: none; }
+  [data-reveal="rule"] { transform: none; }
+  .page { opacity: 1; transform: none; }
+  .converge .cv-join { stroke-dashoffset: 0; }
+  .converge .cv-dot { opacity: 1; }
+  * { animation-duration: .01ms !important; transition-duration: .01ms !important; }
+}
+
+.lang-block[data-role="header"], .lang-block[data-role="footer"] { display: none; }
+</style>
+<noscript><style>
+  /* Sin JavaScript el router no arranca. En vez de dejar la página en blanco
+     mostramos todo el contenido en español, sin animaciones de entrada y con
+     las respuestas de las FAQ abiertas. */
+  [data-role="page"][data-lang="es"] { display: block; opacity: 1; transform: none; }
+  [data-role="header"][data-lang="es"], [data-role="footer"][data-lang="es"] { display: block; }
+  [data-reveal] { opacity: 1; transform: none; clip-path: none; }
+  .faq-a { max-height: none; visibility: visible; }
+  .marquee-track { animation: none; }
+  .wa-float { display: none; }
+</style></noscript>
+</head>
+<body>
+
+  <!-- El href apunta a #main sólo como respaldo sin JS; el manejador mueve el
+       foco a mano para no tocar la ruta. -->
+  <a class="skip-link" href="#main" data-skip>Saltar al contenido</a>
+
+  <header class="site-header lang-block" data-lang="es" data-role="header" lang="es">
+    <nav class="nav" aria-label="Principal">
+      <a href="/" class="logo" aria-label="Targett — inicio"><span class="logo-mark"></span></a>
+      <ul class="nav-links" id="nav-es">
+        <li><a href="/servicios" data-nav-key="services">Servicios</a></li>
+        <li><a href="/nosotros" data-nav-key="about">Nosotros</a></li>
+        <li><a href="/contacto" data-nav-key="contact">Contacto</a></li>
+      </ul>
+      <div class="nav-right">
+        <div class="lang" data-lang-switch aria-label="Idioma">
+          <a href="/" data-switch-lang="es" class="active" lang="es">ES</a>
+          <a href="/en/" data-switch-lang="en" lang="en">EN</a>
+        </div>
+        <a href="/contacto" class="btn btn-primary">Hablemos <span class="arw" aria-hidden="true">→</span></a>
+        <button class="nav-toggle" type="button" aria-label="Abrir menú" aria-expanded="false" aria-controls="nav-es">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </nav>
+  </header>
+
+  <header class="site-header lang-block" data-lang="en" data-role="header" lang="en">
+    <nav class="nav" aria-label="Main">
+      <a href="/en/" class="logo" aria-label="Targett — home"><span class="logo-mark"></span></a>
+      <ul class="nav-links" id="nav-en">
+        <li><a href="/en/services" data-nav-key="services">Services</a></li>
+        <li><a href="/en/about" data-nav-key="about">About</a></li>
+        <li><a href="/en/contact" data-nav-key="contact">Contact</a></li>
+      </ul>
+      <div class="nav-right">
+        <div class="lang" data-lang-switch aria-label="Language">
+          <a href="/" data-switch-lang="es" lang="es">ES</a>
+          <a href="/en/" data-switch-lang="en" class="active" lang="en">EN</a>
+        </div>
+        <a href="/en/contact" class="btn btn-primary">Let's talk <span class="arw" aria-hidden="true">→</span></a>
+        <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="nav-en">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </nav>
+  </header>
+
+<!-- Icono de WhatsApp declarado una sola vez y referenciado con <use>. -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><symbol id="ico-wa" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></symbol></svg>
+
+<main id="main" tabindex="-1">
+
+<!-- ============================================================ ES / INICIO -->
+<section class="page" data-role="page" data-lang="es" data-page="home" id="page-es-home" lang="es">
+
+  <section class="hero">
+    <div class="container">
+      <h1>
+        <span class="ln" data-reveal="clip">El sitio y la pauta,</span>
+        <span class="ln" data-reveal="clip" data-d="1">construidos como</span>
+        <span class="ln" data-reveal="clip" data-d="2"><em>una sola pieza.</em></span>
+      </h1>
+      <div class="hero-meta">
+        <p class="hero-lead" data-reveal data-d="2">Diseñamos y desarrollamos sitios web, y gestionamos las campañas de Meta que los impulsan. Para marcas que quieren construir presencia, no solo generar ventas.</p>
+        <div class="hero-actions" data-reveal data-d="3">
+          <a href="/contacto" class="btn btn-primary">Hablemos <span class="arw" aria-hidden="true">→</span></a>
+          <a href="/servicios" class="btn btn-outline">Ver servicios <span class="arw" aria-hidden="true">→</span></a>
+        </div>
+      </div>
+      <ul class="index" data-index>
+        <li data-reveal><a href="/servicios" class="idx" data-idx>
+          <span class="idx-num">01</span>
+          <span class="idx-name">Web Design</span>
+          <span class="idx-cue"><span>Descubrir</span><span aria-hidden="true">→</span></span>
+        </a></li>
+        <li data-reveal data-d="1"><a href="/servicios" class="idx" data-idx>
+          <span class="idx-num">02</span>
+          <span class="idx-name">Meta Ads</span>
+          <span class="idx-cue"><span>Explorar</span><span aria-hidden="true">→</span></span>
+        </a></li>
+      </ul>
+    </div>
+  </section>
+
+  <div class="marquee" aria-hidden="true"><div class="marquee-track" data-marquee="Estrategia,Diseño,Desarrollo,Pauta,Datos"></div></div>
+
+  <section>
+    <div class="container">
+      <div class="value">
+        <div class="value-row" data-reveal>
+          <span class="value-num">01</span>
+          <h2>Sitio</h2>
+          <p>Diseñamos y construimos el sitio: estructura, mensaje, interfaz y código. Es la base sobre la que se apoya todo lo demás.</p>
+        </div>
+        <div class="value-row" data-reveal>
+          <span class="value-num">02</span>
+          <h2>Adquisición</h2>
+          <p>Campañas de Meta que llevan tráfico relevante hasta ese sitio, con la medición puesta desde el primer día.</p>
+        </div>
+        <div class="value-row value-row--key" data-reveal>
+          <span class="value-num">03</span>
+          <h2>Conexión</h2>
+          <div>
+            <p>Lo que promete el anuncio es exactamente lo que entrega la página. La experiencia continúa después de la llegada: cada oportunidad se puede seguir, entender y trabajar, y lo que aprendemos vuelve al sitio y a la pauta.</p>
+            <svg class="converge" viewBox="0 0 380 130" role="img" aria-label="El sitio y la pauta convergen en una sola pieza">
+              <text x="0" y="24" aria-hidden="true">SITIO</text>
+              <text x="0" y="114" aria-hidden="true">PAUTA</text>
+              <path class="cv-join" d="M58 19 C 150 19, 165 65, 240 65 M62 109 C 150 109, 165 65, 240 65 M240 65 H358"/>
+              <circle class="cv-dot" cx="358" cy="65" r="5"/>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-alt">
+    <div class="container">
+      <div class="duo" data-duo>
+        <a class="svc" href="/servicios" data-svc data-reveal>
+          <span class="svc-num">01</span>
+          <h2>Web Design</h2>
+          <p>Un sitio pensado para convertir. Contenido, diseño y desarrollo bajo una misma dirección, desde el planteamiento hasta la producción.</p>
+          <ul class="chips">
+            <li>Contenido</li><li>UX/UI</li><li>Dirección visual</li><li>Desarrollo</li><li>Responsive</li><li>Performance</li><li>SEO técnico</li>
+          </ul>
+          <span class="svc-cue"><span>Descubrir</span><span aria-hidden="true">→</span></span>
+        </a>
+        <a class="svc" href="/servicios" data-svc data-reveal data-d="1">
+          <span class="svc-num">02</span>
+          <h2>Meta Ads</h2>
+          <p>Campañas en Instagram y Facebook planeadas junto al sitio, para que el tráfico llegue a una página lista para responder.</p>
+          <ul class="chips">
+            <li>Estrategia</li><li>Estructura</li><li>Pixel y CAPI</li><li>Creatividades</li><li>Públicos</li><li>Advantage+</li><li>Optimización</li>
+          </ul>
+          <span class="svc-cue"><span>Explorar</span><span aria-hidden="true">→</span></span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-dark">
+    <div class="container">
+      <div class="system-grid">
+        <div class="system-aside">
+          <h2 data-reveal>Un sitio no se entrega y se olvida.</h2>
+          <p data-reveal data-d="1">Cada paso alimenta al siguiente. Por eso, el sitio se diseña sabiendo qué campaña lo va a alimentar, y cada campaña se construye teniendo claro dónde continuará la experiencia.</p>
+          <a href="/servicios" class="link" data-reveal data-d="2">Ver los dos servicios <span class="arw" aria-hidden="true">→</span></a>
+        </div>
+        <div data-reveal>
+          <ol class="flow" data-flow>
+            <li><em>01</em><b>Estrategia</b><span>Qué vende el negocio, a quién y qué significa ganar.</span></li>
+            <li><em>02</em><b>Sitio</b><span>La página que va a recibir todo ese tráfico.</span></li>
+            <li><em>03</em><b>Tráfico</b><span>Campañas de Meta que llevan gente hasta ella.</span></li>
+            <li><em>04</em><b>Conversión</b><span>Lo que el visitante hace cuando llega.</span></li>
+            <li><em>05</em><b>Seguimiento</b><span>Cada oportunidad queda organizada para que el interés no se pierda después de la conversión.</span></li>
+            <li><em>06</em><b>Optimización</b><span>Lo aprendido cambia el sitio, la pauta y la forma en que se gestionan las oportunidades.</span></li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <div class="faq" data-reveal>
+        <div class="faq-item">
+          <h3 class="faq-h"><button class="faq-q" type="button" aria-expanded="false"><span>¿Cuánto tarda un proyecto?</span><span class="plus" aria-hidden="true"></span></button></h3>
+          <div class="faq-a"><div class="faq-a-in"><p>Depende del alcance. Después de revisar tu proyecto definimos el cronograma en la propuesta, con etapas y entregas, para que sepas qué esperar y cuándo.</p></div></div>
+        </div>
+        <div class="faq-item">
+          <h3 class="faq-h"><button class="faq-q" type="button" aria-expanded="false"><span>¿Puedo contratar solo una parte del servicio?</span><span class="plus" aria-hidden="true"></span></button></h3>
+          <div class="faq-a"><div class="faq-a-in"><p>Sí. Puedes empezar únicamente con el sitio o con las campañas y sumar la otra parte cuando tenga sentido para tu negocio.</p></div></div>
+        </div>
+        <div class="faq-item">
+          <h3 class="faq-h"><button class="faq-q" type="button" aria-expanded="false"><span>¿Cuánto debo invertir en pauta?</span><span class="plus" aria-hidden="true"></span></button></h3>
+          <div class="faq-a"><div class="faq-a-in"><p>No hay un presupuesto único. La inversión depende de tu mercado, tu ticket promedio y el objetivo. Definimos un punto de partida que permita generar resultados y datos útiles desde el inicio, y lo ajustamos con lo que muestre la cuenta.</p></div></div>
+        </div>
+        <div class="faq-item">
+          <h3 class="faq-h"><button class="faq-q" type="button" aria-expanded="false"><span>¿Cómo empezamos?</span><span class="plus" aria-hidden="true"></span></button></h3>
+          <div class="faq-a"><div class="faq-a-in"><p>Escríbenos contándonos qué necesitas. Revisamos el proyecto y te respondemos con una propuesta de alcance, tiempos e inversión.</p></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta section-dark">
+    <div class="container">
+      <h2 data-reveal="clip">¿Qué estás <em>construyendo?</em></h2>
+      <div class="cta-foot">
+        <p data-reveal data-d="1">Cuéntanos qué quieres construir. Revisamos el proyecto y definimos el siguiente paso.</p>
+        <div class="cta-actions" data-reveal data-d="2">
+          <a href="/contacto" class="btn btn-light">Hablemos <span class="arw" aria-hidden="true">→</span></a>
+          <a href="/contacto" data-wa class="btn btn-wa"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="#ico-wa"></use></svg> WhatsApp</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</section>
+
+<!-- ========================================================== ES / SERVICIOS -->
+<section class="page" data-role="page" data-lang="es" data-page="services" id="page-es-services" lang="es">
+
+  <section class="lead-in">
+    <div class="container">
+      <h1>
+        <span class="ln" data-reveal="clip">Dos capacidades.</span>
+        <span class="ln" data-reveal="clip" data-d="1">Una sola estrategia.</span>
+      </h1>
+      <p data-reveal data-d="2">No vendemos servicios sueltos. El sitio y la pauta se planean juntos: lo que promete la campaña es exactamente lo que entrega la página.</p>
+    </div>
+  </section>
+
+  <section class="detail">
+    <div class="container">
+      <article data-reveal>
+        <div class="detail-head">
+          <span class="svc-num">01</span>
+          <h2>Web Design</h2>
+        </div>
+        <div class="detail-body">
+          <div>
+            <p class="detail-intro">Diseñamos y construimos el sitio completo. El desarrollo no es un servicio aparte: es la misma pieza de trabajo llevada hasta producción.</p>
+            <p class="prompt">¿Tienes un sitio que necesita una nueva dirección?</p>
+            <a href="/contacto" class="link">Cuéntanos qué quieres mejorar <span class="arw" aria-hidden="true">→</span></a>
+          </div>
+          <ul class="caps">
+            <li><b>Estrategia de contenido</b><span>Definimos qué comunicar, cómo organizarlo y qué destacar para que tu propuesta se entienda con claridad.</span></li>
+            <li><b>UX / UI</b><span>Diseñamos una experiencia intuitiva, con una estructura que guía al usuario de forma natural hacia cada acción.</span></li>
+            <li><b>Dirección visual</b><span>Construimos una identidad digital coherente con tu marca, cuidando cada elemento para transmitir confianza y calidad.</span></li>
+            <li><b>Desarrollo</b><span>Convertimos el diseño en un sitio sólido, flexible y preparado para integrarse con las herramientas que necesita tu negocio.</span></li>
+            <li><b>Responsive</b><span>Diseñamos para que la experiencia se mantenga clara, atractiva y funcional en cualquier pantalla.</span></li>
+            <li><b>Performance</b><span>Optimizamos cada detalle para ofrecer una experiencia ágil, fluida y agradable desde el primer momento.</span></li>
+            <li><b>SEO técnico</b><span>Preparamos la estructura del sitio para facilitar su comprensión por parte de los buscadores y mejorar su visibilidad.</span></li>
+          </ul>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <div class="marquee" aria-hidden="true"><div class="marquee-track" data-marquee="Estrategia,Diseño,Desarrollo,Pauta,Datos"></div></div>
+
+  <section class="detail section-alt">
+    <div class="container">
+      <article data-reveal>
+        <div class="detail-head">
+          <span class="svc-num">02</span>
+          <h2>Meta Ads</h2>
+        </div>
+        <div class="detail-body">
+          <div>
+            <p class="detail-intro">Trabajamos una plataforma a fondo: Instagram y Facebook. Las campañas se planean junto al sitio, así el tráfico llega a una página preparada y cada peso invertido se puede leer.</p>
+            <p class="prompt">¿Ya estás pautando pero los números no cierran?</p>
+            <a href="/contacto" class="link">Revisemos tu estrategia <span class="arw" aria-hidden="true">→</span></a>
+          </div>
+          <ul class="caps">
+            <li><b>Estrategia</b><span>Definimos objetivos, inversión y criterios de éxito para que cada decisión tenga una dirección clara.</span></li>
+            <li><b>Estructura de cuenta</b><span>Organizamos campañas, conjuntos y anuncios de forma estratégica para facilitar la gestión y lectura de resultados.</span></li>
+            <li><b>Pixel y API de Conversiones</b><span>Configuramos la medición para obtener información fiable y tomar mejores decisiones de inversión.</span></li>
+            <li><b>Creatividades</b><span>Desarrollamos piezas conectadas con tu propuesta y pensadas para captar la atención de la audiencia adecuada.</span></li>
+            <li><b>Públicos</b><span>Construimos una estrategia de audiencias que combina prospección, remarketing y segmentaciones relevantes para cada etapa.</span></li>
+            <li><b>Advantage+</b><span>Aprovechamos las herramientas de automatización de Meta cuando pueden mejorar el rendimiento, manteniendo una estrategia clara detrás.</span></li>
+            <li><b>Optimización</b><span>Analizamos resultados, probamos nuevas variables y ajustamos las campañas continuamente para buscar mejores oportunidades de rendimiento.</span></li>
+          </ul>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section class="cta section-dark">
+    <div class="container">
+      <h2 data-reveal="clip">¿Qué estás <em>construyendo?</em></h2>
+      <div class="cta-foot">
+        <p data-reveal data-d="1">Cuéntanos qué quieres construir. Revisamos el proyecto y definimos el siguiente paso.</p>
+        <div class="cta-actions" data-reveal data-d="2">
+          <a href="/contacto" class="btn btn-light">Hablemos <span class="arw" aria-hidden="true">→</span></a>
+          <a href="/contacto" data-wa class="btn btn-wa"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="#ico-wa"></use></svg> WhatsApp</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</section>
+
+<!-- ========================================================== ES / NOSOTROS -->
+<section class="page" data-role="page" data-lang="es" data-page="about" id="page-es-about" lang="es">
+
+  <section class="declare">
+    <div class="container">
+      <h1>
+        <span class="ln" data-reveal="clip">Somos un estudio</span>
+        <span class="ln" data-reveal="clip" data-d="1">digital independiente.</span>
+      </h1>
+      <div class="declare-foot">
+        <p class="declare-sub" data-reveal data-d="2">Diseñamos, construimos y hacemos crecer experiencias digitales pensadas para acompañar los objetivos de tu negocio.</p>
+        <p class="muted" data-reveal data-d="3">Unimos estrategia, diseño y desarrollo para que cada parte del proyecto tenga sentido dentro del conjunto.</p>
+      </div>
+      <span class="rule" data-reveal="rule" data-d="3"></span>
+    </div>
+  </section>
+
+  <section class="section-alt">
+    <div class="container">
+      <div class="principles" data-principles data-reveal>
+        <a class="principle" href="/contacto" data-principle>
+          <span class="pr-num">01</span>
+          <div class="pr-body">
+            <h2>Cercano</h2>
+            <p>Trabajamos de forma directa con cada proyecto para entenderlo, tomar decisiones con contexto y mantener una comunicación clara durante todo el proceso.</p>
+          </div>
+          <span class="pr-arw" aria-hidden="true">→</span>
+        </a>
+        <a class="principle" href="/contacto" data-principle>
+          <span class="pr-num">02</span>
+          <div class="pr-body">
+            <h2>Enfocado</h2>
+            <p>Trabajamos con un número cuidado de proyectos para dedicar a cada uno el tiempo y la atención que merece.</p>
+          </div>
+          <span class="pr-arw" aria-hidden="true">→</span>
+        </a>
+        <a class="principle" href="/contacto" data-principle>
+          <span class="pr-num">03</span>
+          <div class="pr-body">
+            <h2>Conectado</h2>
+            <p>Diseño, desarrollo y marketing parten de una misma visión para que cada elemento del proyecto trabaje en conjunto.</p>
+          </div>
+          <span class="pr-arw" aria-hidden="true">→</span>
+        </a>
+        <a class="principle" href="/contacto" data-principle>
+          <span class="pr-num">04</span>
+          <div class="pr-body">
+            <h2>Medido</h2>
+            <p>Utilizamos datos y resultados como parte del proceso para entender qué funciona, qué puede mejorar y dónde están las oportunidades.</p>
+          </div>
+          <span class="pr-arw" aria-hidden="true">→</span>
+        </a>
+        <a class="principle" href="/contacto" data-principle>
+          <span class="pr-num">05</span>
+          <div class="pr-body">
+            <h2>Intencional</h2>
+            <p>Cada decisión de diseño tiene un propósito: hacer más clara la experiencia, fortalecer la marca y acercar al usuario a la acción.</p>
+          </div>
+          <span class="pr-arw" aria-hidden="true">→</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <div class="method" data-method-rail data-reveal>
+        <div class="method-line"></div>
+        <div class="step" tabindex="0">
+          <span class="step-num">01</span>
+          <h3>Entender</h3>
+          <p>El negocio, el cliente y qué debe lograr el proyecto.</p>
+        </div>
+        <div class="step" tabindex="0">
+          <span class="step-num">02</span>
+          <h3>Definir</h3>
+          <p>Alcance, estructura y mensaje antes de abrir el editor.</p>
+        </div>
+        <div class="step" tabindex="0">
+          <span class="step-num">03</span>
+          <h3>Construir</h3>
+          <p>Diseño y desarrollo con foco en velocidad, móvil y SEO técnico.</p>
+        </div>
+        <div class="step" tabindex="0">
+          <span class="step-num">04</span>
+          <h3>Lanzar</h3>
+          <p>Publicación, medición instalada y campañas en marcha.</p>
+        </div>
+        <div class="step" tabindex="0">
+          <span class="step-num">05</span>
+          <h3>Optimizar</h3>
+          <p>Ajustes sobre datos reales, no sobre impresiones.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <p class="closing" data-reveal="clip">Diseñamos con intención. Construimos para funcionar.</p>
+    </div>
+  </section>
+
+  <section class="cta section-dark">
+    <div class="container">
+      <h2 data-reveal="clip">¿Qué estás <em>construyendo?</em></h2>
+      <div class="cta-foot">
+        <p data-reveal data-d="1">Cuéntanos qué quieres construir. Revisamos el proyecto y definimos el siguiente paso.</p>
+        <div class="cta-actions" data-reveal data-d="2">
+          <a href="/contacto" class="btn btn-light">Hablemos <span class="arw" aria-hidden="true">→</span></a>
+          <a href="/contacto" data-wa class="btn btn-wa"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="#ico-wa"></use></svg> WhatsApp</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</section>
+
+<!-- =========================================================== ES / CONTACTO -->
+<section class="page" data-role="page" data-lang="es" data-page="contact" id="page-es-contact" lang="es">
+
+  <!-- Título, entradilla y formulario viven en la MISMA sección para que se
+       lean como un solo bloque, no como piezas sueltas apiladas. -->
+  <section class="lead-in contact">
+    <div class="container">
+      <h1 data-reveal="clip">Hablemos de tu proyecto</h1>
+      <p data-reveal data-d="2">Cuéntanos qué quieres lograr y te responderemos con una propuesta concreta, pensada para lo que realmente necesitas.</p>
+      <div class="contact-form" data-reveal data-d="3">
+          <!-- Para activar el envío real, añade action/method (por ejemplo el
+               endpoint del CRM) al <form>. El JS deja pasar el envío nativo en
+               cuanto exista un atributo action. -->
+          <form class="form" novalidate>
+            <div class="notice" role="status"></div>
+            <div class="row2">
+              <div class="field">
+                <label for="name-es">Nombre</label>
+                <input type="text" id="name-es" name="name" autocomplete="name" required>
+              </div>
+              <div class="field">
+                <label for="email-es">Correo</label>
+                <input type="email" id="email-es" name="email" autocomplete="email" required>
+              </div>
+            </div>
+            <div class="field">
+              <label for="company-es">Empresa o marca (opcional)</label>
+              <input type="text" id="company-es" name="company" autocomplete="organization">
+            </div>
+            <div class="field">
+              <label for="service-es">¿Qué necesitas?</label>
+              <select id="service-es" name="service">
+                <option>Web Design</option>
+                <option>Meta Ads</option>
+                <option>Los dos</option>
+                <option>Aún no lo tengo claro</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="message-es">Cuéntanos del proyecto</label>
+              <textarea id="message-es" name="message" rows="5" aria-describedby="hint-es" required></textarea>
+              <p class="hint" id="hint-es">Qué vendes, a quién y qué necesitas lograr. Si ya tienes fechas, referencias o un sitio actual, inclúyelos.</p>
+            </div>
+            <button type="submit" class="btn btn-primary">Enviar mensaje <span class="arw" aria-hidden="true">→</span></button>
+            <p class="note">Al enviar aceptas que Targett te contacte por correo o WhatsApp sobre este proyecto.</p>
+          </form>
+      </div>
+    </div>
+  </section>
+
+</section>
+
+<!-- ============================================================== EN / HOME -->
+<section class="page" data-role="page" data-lang="en" data-page="home" id="page-en-home" lang="en">
+
+  <section class="hero">
+    <div class="container">
+      <h1>
+        <span class="ln" data-reveal="clip">The site and the ads,</span>
+        <span class="ln" data-reveal="clip" data-d="1">built as</span>
+        <span class="ln" data-reveal="clip" data-d="2"><em>one piece.</em></span>
+      </h1>
+      <div class="hero-meta">
+        <p class="hero-lead" data-reveal data-d="2">We design and build websites, and we run the Meta campaigns that drive them. For brands that want to build presence, not just chase sales.</p>
+        <div class="hero-actions" data-reveal data-d="3">
+          <a href="/en/contact" class="btn btn-primary">Let's talk <span class="arw" aria-hidden="true">→</span></a>
+          <a href="/en/services" class="btn btn-outline">See services <span class="arw" aria-hidden="true">→</span></a>
+        </div>
+      </div>
+      <ul class="index" data-index>
+        <li data-reveal><a href="/en/services" class="idx" data-idx>
+          <span class="idx-num">01</span>
+          <span class="idx-name">Web Design</span>
+          <span class="idx-cue"><span>Discover</span><span aria-hidden="true">→</span></span>
+        </a></li>
+        <li data-reveal data-d="1"><a href="/en/services" class="idx" data-idx>
+          <span class="idx-num">02</span>
+          <span class="idx-name">Meta Ads</span>
+          <span class="idx-cue"><span>Explore</span><span aria-hidden="true">→</span></span>
+        </a></li>
+      </ul>
+    </div>
+  </section>
+
+  <div class="marquee" aria-hidden="true"><div class="marquee-track" data-marquee="Strategy,Design,Development,Ads,Data"></div></div>
+
+  <section>
+    <div class="container">
+      <div class="value">
+        <div class="value-row" data-reveal>
+          <span class="value-num">01</span>
+          <h2>Site</h2>
+          <p>We design and build the site: structure, message, interface and code. It's the ground everything else stands on.</p>
+        </div>
+        <div class="value-row" data-reveal>
+          <span class="value-num">02</span>
+          <h2>Acquisition</h2>
+          <p>Meta campaigns that bring relevant traffic to that site, with measurement in place from day one.</p>
+        </div>
+        <div class="value-row value-row--key" data-reveal>
+          <span class="value-num">03</span>
+          <h2>Connection</h2>
+          <div>
+            <p>What the ad promises is exactly what the page delivers. The experience continues after the visit: every opportunity can be followed, understood and worked on, and what we learn goes back into the site and the ads.</p>
+            <svg class="converge" viewBox="0 0 380 130" role="img" aria-label="The site and the ads converge into one piece">
+              <text x="0" y="24" aria-hidden="true">SITE</text>
+              <text x="0" y="114" aria-hidden="true">ADS</text>
+              <path class="cv-join" d="M52 19 C 150 19, 165 65, 240 65 M48 109 C 150 109, 165 65, 240 65 M240 65 H358"/>
+              <circle class="cv-dot" cx="358" cy="65" r="5"/>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-alt">
+    <div class="container">
+      <div class="duo" data-duo>
+        <a class="svc" href="/en/services" data-svc data-reveal>
+          <span class="svc-num">01</span>
+          <h2>Web Design</h2>
+          <p>A site built to convert. Content, design and development under one direction, from the brief through to production.</p>
+          <ul class="chips">
+            <li>Content</li><li>UX/UI</li><li>Visual direction</li><li>Development</li><li>Responsive</li><li>Performance</li><li>Technical SEO</li>
+          </ul>
+          <span class="svc-cue"><span>Discover</span><span aria-hidden="true">→</span></span>
+        </a>
+        <a class="svc" href="/en/services" data-svc data-reveal data-d="1">
+          <span class="svc-num">02</span>
+          <h2>Meta Ads</h2>
+          <p>Instagram and Facebook campaigns planned alongside the site, so traffic lands on a page that's ready to answer.</p>
+          <ul class="chips">
+            <li>Strategy</li><li>Structure</li><li>Pixel &amp; CAPI</li><li>Creative</li><li>Audiences</li><li>Advantage+</li><li>Optimization</li>
+          </ul>
+          <span class="svc-cue"><span>Explore</span><span aria-hidden="true">→</span></span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-dark">
+    <div class="container">
+      <div class="system-grid">
+        <div class="system-aside">
+          <h2 data-reveal>A site isn't handed over and forgotten.</h2>
+          <p data-reveal data-d="1">Every step feeds the next. That's why the site is designed knowing which campaign will feed it, and every campaign is built knowing where the experience continues.</p>
+          <a href="/en/services" class="link" data-reveal data-d="2">See both services <span class="arw" aria-hidden="true">→</span></a>
+        </div>
+        <div data-reveal>
+          <ol class="flow" data-flow>
+            <li><em>01</em><b>Strategy</b><span>What the business sells, to whom, and what winning means.</span></li>
+            <li><em>02</em><b>Website</b><span>The page that will receive all that traffic.</span></li>
+            <li><em>03</em><b>Traffic</b><span>Meta campaigns that bring people to it.</span></li>
+            <li><em>04</em><b>Conversion</b><span>What the visitor does once they arrive.</span></li>
+            <li><em>05</em><b>Follow-up</b><span>Every opportunity is kept organised so interest isn't lost after the conversion.</span></li>
+            <li><em>06</em><b>Optimization</b><span>What we learn changes the site, the ads and the way opportunities are handled.</span></li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <div class="faq" data-reveal>
+        <div class="faq-item">
+          <h3 class="faq-h"><button class="faq-q" type="button" aria-expanded="false"><span>How long does a project take?</span><span class="plus" aria-hidden="true"></span></button></h3>
+          <div class="faq-a"><div class="faq-a-in"><p>It depends on scope. Once we've reviewed your project we set the schedule in the proposal, with stages and deliverables, so you know what to expect and when.</p></div></div>
+        </div>
+        <div class="faq-item">
+          <h3 class="faq-h"><button class="faq-q" type="button" aria-expanded="false"><span>Can I hire just one part of the service?</span><span class="plus" aria-hidden="true"></span></button></h3>
+          <div class="faq-a"><div class="faq-a-in"><p>Yes. You can start with the site only or the campaigns only, and add the other part when it makes sense for your business.</p></div></div>
+        </div>
+        <div class="faq-item">
+          <h3 class="faq-h"><button class="faq-q" type="button" aria-expanded="false"><span>How much should I spend on ads?</span><span class="plus" aria-hidden="true"></span></button></h3>
+          <div class="faq-a"><div class="faq-a-in"><p>There's no single budget. It depends on your market, your average order value and the goal. We set a starting point that can produce results and useful data from day one, and adjust it against what the account shows.</p></div></div>
+        </div>
+        <div class="faq-item">
+          <h3 class="faq-h"><button class="faq-q" type="button" aria-expanded="false"><span>How do we start?</span><span class="plus" aria-hidden="true"></span></button></h3>
+          <div class="faq-a"><div class="faq-a-in"><p>Write to us and tell us what you need. We review the project and come back with a proposal covering scope, timeline and investment.</p></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta section-dark">
+    <div class="container">
+      <h2 data-reveal="clip">What are you <em>building?</em></h2>
+      <div class="cta-foot">
+        <p data-reveal data-d="1">Tell us what you want to build. We'll review the project and define the next step.</p>
+        <div class="cta-actions" data-reveal data-d="2">
+          <a href="/en/contact" class="btn btn-light">Let's talk <span class="arw" aria-hidden="true">→</span></a>
+          <a href="/en/contact" data-wa class="btn btn-wa"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="#ico-wa"></use></svg> WhatsApp</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</section>
+
+<!-- ========================================================== EN / SERVICES -->
+<section class="page" data-role="page" data-lang="en" data-page="services" id="page-en-services" lang="en">
+
+  <section class="lead-in">
+    <div class="container">
+      <h1>
+        <span class="ln" data-reveal="clip">Two capabilities.</span>
+        <span class="ln" data-reveal="clip" data-d="1">One strategy.</span>
+      </h1>
+      <p data-reveal data-d="2">We don't sell services in isolation. The site and the ads are planned together: what the campaign promises is exactly what the page delivers.</p>
+    </div>
+  </section>
+
+  <section class="detail">
+    <div class="container">
+      <article data-reveal>
+        <div class="detail-head">
+          <span class="svc-num">01</span>
+          <h2>Web Design</h2>
+        </div>
+        <div class="detail-body">
+          <div>
+            <p class="detail-intro">We design and build the whole site. Development isn't a separate service — it's the same piece of work carried through to production.</p>
+            <p class="prompt">Got a site that needs a new direction?</p>
+            <a href="/en/contact" class="link">Tell us what you'd change <span class="arw" aria-hidden="true">→</span></a>
+          </div>
+          <ul class="caps">
+            <li><b>Content strategy</b><span>We define what to communicate, how to organise it and what to highlight so your offer reads clearly.</span></li>
+            <li><b>UX / UI</b><span>We design an intuitive experience, with a structure that guides the user naturally towards each action.</span></li>
+            <li><b>Visual direction</b><span>We build a digital identity consistent with your brand, caring for every element so it conveys trust and quality.</span></li>
+            <li><b>Development</b><span>We turn the design into a solid, flexible site, ready to integrate with the tools your business needs.</span></li>
+            <li><b>Responsive</b><span>We design so the experience stays clear, attractive and functional on any screen.</span></li>
+            <li><b>Performance</b><span>We optimise every detail to deliver a fast, fluid and pleasant experience from the first moment.</span></li>
+            <li><b>Technical SEO</b><span>We prepare the site's structure so search engines can understand it and improve its visibility.</span></li>
+          </ul>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <div class="marquee" aria-hidden="true"><div class="marquee-track" data-marquee="Strategy,Design,Development,Ads,Data"></div></div>
+
+  <section class="detail section-alt">
+    <div class="container">
+      <article data-reveal>
+        <div class="detail-head">
+          <span class="svc-num">02</span>
+          <h2>Meta Ads</h2>
+        </div>
+        <div class="detail-body">
+          <div>
+            <p class="detail-intro">We work one platform properly: Instagram and Facebook. Campaigns are planned alongside the site, so traffic lands somewhere ready for it and the spend can actually be read.</p>
+            <p class="prompt">Already running ads but the numbers don't add up?</p>
+            <a href="/en/contact" class="link">Let's review your strategy <span class="arw" aria-hidden="true">→</span></a>
+          </div>
+          <ul class="caps">
+            <li><b>Strategy</b><span>We define goals, budget and success criteria so every decision has a clear direction.</span></li>
+            <li><b>Account structure</b><span>We organise campaigns, ad sets and ads strategically, so they're easier to manage and to read.</span></li>
+            <li><b>Pixel &amp; Conversions API</b><span>We set up measurement to get reliable information and make better investment decisions.</span></li>
+            <li><b>Creative</b><span>We develop assets connected to your offer and built to catch the attention of the right audience.</span></li>
+            <li><b>Audiences</b><span>We build an audience strategy combining prospecting, remarketing and segments relevant to each stage.</span></li>
+            <li><b>Advantage+</b><span>We use Meta's automation tools where they can improve performance, with a clear strategy behind them.</span></li>
+            <li><b>Optimization</b><span>We analyse results, test new variables and adjust campaigns continuously to find better performance opportunities.</span></li>
+          </ul>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section class="cta section-dark">
+    <div class="container">
+      <h2 data-reveal="clip">What are you <em>building?</em></h2>
+      <div class="cta-foot">
+        <p data-reveal data-d="1">Tell us what you want to build. We'll review the project and define the next step.</p>
+        <div class="cta-actions" data-reveal data-d="2">
+          <a href="/en/contact" class="btn btn-light">Let's talk <span class="arw" aria-hidden="true">→</span></a>
+          <a href="/en/contact" data-wa class="btn btn-wa"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="#ico-wa"></use></svg> WhatsApp</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</section>
+
+<!-- ============================================================= EN / ABOUT -->
+<section class="page" data-role="page" data-lang="en" data-page="about" id="page-en-about" lang="en">
+
+  <section class="declare">
+    <div class="container">
+      <h1>
+        <span class="ln" data-reveal="clip">We're an independent</span>
+        <span class="ln" data-reveal="clip" data-d="1">digital studio.</span>
+      </h1>
+      <div class="declare-foot">
+        <p class="declare-sub" data-reveal data-d="2">We design, build and grow digital experiences made to support your business goals.</p>
+        <p class="muted" data-reveal data-d="3">We bring strategy, design and development together so every part of the project makes sense within the whole.</p>
+      </div>
+      <span class="rule" data-reveal="rule" data-d="3"></span>
+    </div>
+  </section>
+
+  <section class="section-alt">
+    <div class="container">
+      <div class="principles" data-principles data-reveal>
+        <a class="principle" href="/en/contact" data-principle>
+          <span class="pr-num">01</span>
+          <div class="pr-body">
+            <h2>Close</h2>
+            <p>We work directly on every project, so we understand it, make decisions with context and keep communication clear throughout.</p>
+          </div>
+          <span class="pr-arw" aria-hidden="true">→</span>
+        </a>
+        <a class="principle" href="/en/contact" data-principle>
+          <span class="pr-num">02</span>
+          <div class="pr-body">
+            <h2>Focused</h2>
+            <p>We take on a carefully limited number of projects, so each one gets the time and attention it deserves.</p>
+          </div>
+          <span class="pr-arw" aria-hidden="true">→</span>
+        </a>
+        <a class="principle" href="/en/contact" data-principle>
+          <span class="pr-num">03</span>
+          <div class="pr-body">
+            <h2>Connected</h2>
+            <p>Design, development and marketing start from the same vision, so every element of the project works together.</p>
+          </div>
+          <span class="pr-arw" aria-hidden="true">→</span>
+        </a>
+        <a class="principle" href="/en/contact" data-principle>
+          <span class="pr-num">04</span>
+          <div class="pr-body">
+            <h2>Measured</h2>
+            <p>We use data and results as part of the process, to understand what works, what can improve and where the opportunities are.</p>
+          </div>
+          <span class="pr-arw" aria-hidden="true">→</span>
+        </a>
+        <a class="principle" href="/en/contact" data-principle>
+          <span class="pr-num">05</span>
+          <div class="pr-body">
+            <h2>Intentional</h2>
+            <p>Every design decision has a purpose: to make the experience clearer, strengthen the brand and bring the user closer to the action.</p>
+          </div>
+          <span class="pr-arw" aria-hidden="true">→</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <div class="method" data-method-rail data-reveal>
+        <div class="method-line"></div>
+        <div class="step" tabindex="0">
+          <span class="step-num">01</span>
+          <h3>Understand</h3>
+          <p>The business, the customer and what the project has to achieve.</p>
+        </div>
+        <div class="step" tabindex="0">
+          <span class="step-num">02</span>
+          <h3>Define</h3>
+          <p>Scope, structure and message before the editor is opened.</p>
+        </div>
+        <div class="step" tabindex="0">
+          <span class="step-num">03</span>
+          <h3>Build</h3>
+          <p>Design and development focused on speed, mobile and technical SEO.</p>
+        </div>
+        <div class="step" tabindex="0">
+          <span class="step-num">04</span>
+          <h3>Launch</h3>
+          <p>Publication, measurement in place and campaigns running.</p>
+        </div>
+        <div class="step" tabindex="0">
+          <span class="step-num">05</span>
+          <h3>Optimize</h3>
+          <p>Adjustments on real data, not on impressions.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <p class="closing" data-reveal="clip">We design with intent. We build to work.</p>
+    </div>
+  </section>
+
+  <section class="cta section-dark">
+    <div class="container">
+      <h2 data-reveal="clip">What are you <em>building?</em></h2>
+      <div class="cta-foot">
+        <p data-reveal data-d="1">Tell us what you want to build. We'll review the project and define the next step.</p>
+        <div class="cta-actions" data-reveal data-d="2">
+          <a href="/en/contact" class="btn btn-light">Let's talk <span class="arw" aria-hidden="true">→</span></a>
+          <a href="/en/contact" data-wa class="btn btn-wa"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="#ico-wa"></use></svg> WhatsApp</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</section>
+
+<!-- =========================================================== EN / CONTACT -->
+<section class="page" data-role="page" data-lang="en" data-page="contact" id="page-en-contact" lang="en">
+
+  <!-- Title, intro and form live in the SAME section so they read as one
+       block rather than separate stacked pieces. -->
+  <section class="lead-in contact">
+    <div class="container">
+      <h1 data-reveal="clip">Let's talk about your project</h1>
+      <p data-reveal data-d="2">Tell us what you want to achieve and we'll come back with a concrete proposal, shaped around what you actually need.</p>
+      <div class="contact-form" data-reveal data-d="3">
+          <!-- To enable real submissions, add action/method (e.g. the CRM
+               endpoint) to the <form>. The JS lets the native submit through
+               as soon as an action attribute exists. -->
+          <form class="form" novalidate>
+            <div class="notice" role="status"></div>
+            <div class="row2">
+              <div class="field">
+                <label for="name-en">Name</label>
+                <input type="text" id="name-en" name="name" autocomplete="name" required>
+              </div>
+              <div class="field">
+                <label for="email-en">Email</label>
+                <input type="email" id="email-en" name="email" autocomplete="email" required>
+              </div>
+            </div>
+            <div class="field">
+              <label for="company-en">Company or brand (optional)</label>
+              <input type="text" id="company-en" name="company" autocomplete="organization">
+            </div>
+            <div class="field">
+              <label for="service-en">What do you need?</label>
+              <select id="service-en" name="service">
+                <option>Web Design</option>
+                <option>Meta Ads</option>
+                <option>Both</option>
+                <option>Not sure yet</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="message-en">Tell us about the project</label>
+              <textarea id="message-en" name="message" rows="5" aria-describedby="hint-en" required></textarea>
+              <p class="hint" id="hint-en">What you sell, who you sell it to and what you need to achieve. Add any dates, references or a current site if you have them.</p>
+            </div>
+            <button type="submit" class="btn btn-primary">Send message <span class="arw" aria-hidden="true">→</span></button>
+            <p class="note">By submitting you agree that Targett may contact you by email or WhatsApp about this project.</p>
+          </form>
+      </div>
+    </div>
+  </section>
+
+</section>
+</main>
+
+
+  <footer class="site-footer lang-block" data-lang="es" data-role="footer" lang="es">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <a href="/" class="logo" aria-label="Targett — inicio"><span class="logo-mark"></span></a>
+          <p>Diseño web y campañas de Meta, planeados como una sola pieza.</p>
+        </div>
+        <div class="footer-contact">
+          <div>
+            <div class="lbl">Correo</div>
+            <a href="mailto:hola@wearetargett.com" data-config="email">hola@wearetargett.com</a>
+          </div>
+          <div>
+            <div class="lbl">WhatsApp</div>
+            <a href="/contacto" data-wa>Escríbenos</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© <span data-year>2026</span> Targett. Todos los derechos reservados.</span>
+      </div>
+    </div>
+  </footer>
+
+  <footer class="site-footer lang-block" data-lang="en" data-role="footer" lang="en">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <a href="/en/" class="logo" aria-label="Targett — home"><span class="logo-mark"></span></a>
+          <p>Web design and Meta campaigns, planned as one piece.</p>
+        </div>
+        <div class="footer-contact">
+          <div>
+            <div class="lbl">Email</div>
+            <a href="mailto:hello@wearetargett.com" data-config="email">hello@wearetargett.com</a>
+          </div>
+          <div>
+            <div class="lbl">WhatsApp</div>
+            <a href="/en/contact" data-wa>Message us</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© <span data-year>2026</span> Targett. All rights reserved.</span>
+      </div>
+    </div>
+  </footer>
+
+<!-- Botón flotante: es global a las dos lenguas, así que su destino y su
+     etiqueta los fija el router en cada ruta. El valor de aquí es el de
+     respaldo en español, el que vale si el JS no llega a ejecutarse. -->
+<a href="/contacto" data-wa class="wa-float" aria-label="Escribir por WhatsApp">
+  <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="#ico-wa"></use></svg>
+</a>
+
+<script>
+/* ==========================================================================
+   TARGETT — router de URLs reales + interacciones
+   Vanilla JS, sin dependencias. Todo el estado vive en la ruta.
+   ========================================================================== */
+
+/* ==========================================================================
+   PUNTO ÚNICO DE CONFIGURACIÓN
+   Todo dato editable del sitio vive aquí y en ningún otro sitio del JS.
+   ========================================================================== */
+var SITE_CONFIG = {
+  // Número en formato internacional, sin + ni espacios. Mientras contenga una
+  // X se trata como pendiente y NINGÚN botón manda a una wa.me muerta.
+  whatsapp: '57XXXXXXXXXX',
+  whatsappText: {
+    es: 'Hola, quiero conocer más sobre los servicios de Targett.',
+    en: 'Hi, I would like to know more about Targett.'
+  },
+  email: { es: 'hola@wearetargett.com', en: 'hello@wearetargett.com' },
+  // Dominio de producción, sin barra final. Alimenta canonical, og:url y
+  // hreflang. Debe coincidir con el dominio real antes de publicar.
+  domain: 'https://wearetargett.com'
+};
+
+/* Mapa de rutas: única fuente de verdad de las URLs del sitio. */
+var ROUTES = [
+  { key: 'home',     es: '/',           en: '/en/' },
+  { key: 'services', es: '/servicios',  en: '/en/services' },
+  { key: 'about',    es: '/nosotros',   en: '/en/about' },
+  { key: 'contact',  es: '/contacto',   en: '/en/contact' }
+];
+var CANON = {};
+for (var _r = 0; _r < ROUTES.length; _r++) {
+  CANON[ROUTES[_r].es] = { key: ROUTES[_r].key, lang: 'es' };
+  CANON[ROUTES[_r].en] = { key: ROUTES[_r].key, lang: 'en' };
+}
+
+/* ==========================================================================
+   DÓNDE ESTÁ ALOJADO EL SITIO
+   El HTML lleva las rutas canónicas escritas (/servicios, /en/about) porque
+   son las que debe leer un rastreador. Pero el archivo puede abrirse en tres
+   sitios y en dos de ellos esas rutas no existen:
+     1. Raíz de un dominio   -> /servicios           funciona tal cual
+     2. Subcarpeta           -> /demo/servicios      hay que anteponer /demo
+     3. Doble clic (file://) -> file:///C:/servicios no existe
+   Detectamos dónde estamos y reescribimos los href en tiempo de ejecución.
+   Con file:// se usa el hash: pushState lanza SecurityError en ese protocolo.
+   ========================================================================== */
+var USE_HASH = (location.protocol === 'file:') || !(window.history && window.history.pushState);
+var BASE = (function () {
+  var p = location.pathname;
+  if (USE_HASH || /\.html?$/i.test(p)) return p.replace(/[^/]*$/, '').replace(/\/$/, '');
+  for (var i = 0; i < ROUTES.length; i++) {
+    var cands = [ROUTES[i].es, ROUTES[i].en];
+    for (var c = 0; c < cands.length; c++) {
+      var r = cands[c];
+      if (r !== '/' && p.length >= r.length && p.slice(-r.length) === r) return p.slice(0, -r.length);
+    }
+  }
+  return p.replace(/\/$/, '');
+})();
+var DOC_PATH = location.pathname;
+
+/* REGLA GLOBAL: la pestaña muestra siempre y únicamente "Targett". */
+var SITE_TITLE = 'Targett';
+
+/* El <title> no cambia nunca, así que la meta description es lo que
+   diferencia cada página en los resultados de búsqueda. */
+var META = {
+  es: {
+    home:     'Estudio digital independiente en Bogotá. Diseñamos y desarrollamos sitios web y gestionamos campañas de Meta planeadas junto al sitio, con optimización sobre resultados reales.',
+    services: 'Diseño y desarrollo web y campañas de Meta Ads. Estrategia de contenido, UX/UI, desarrollo, performance, SEO técnico, Pixel y API de Conversiones, públicos y optimización.',
+    about:    'Cómo trabaja Targett: estudio digital independiente en Bogotá. Trato cercano, pocos proyectos a la vez y el sitio y la pauta pensados como una sola pieza.',
+    contact:  'Hablemos de tu proyecto. Cuéntanos qué quieres lograr y te respondemos con una propuesta concreta, pensada para lo que realmente necesitas.'
+  },
+  en: {
+    home:     'Independent digital studio in Bogotá. We design and build websites and run the Meta campaigns planned alongside them, optimised on real results.',
+    services: 'Web design and development and Meta Ads campaigns. Content strategy, UX/UI, development, performance, technical SEO, Pixel and Conversions API, audiences and optimization.',
+    about:    'How Targett works: an independent digital studio in Bogotá. Close contact, a few projects at a time, and the site and the ads thought through as one piece.',
+    contact:  'Let us talk about your project. Tell us what you want to achieve and we come back with a concrete proposal, shaped around what you actually need.'
+  }
+};
+
+var STRINGS = {
+  es: {
+    skip: 'Saltar al contenido',
+    menuOpen: 'Abrir menú',
+    menuClose: 'Cerrar menú',
+    whatsapp: 'Escribir por WhatsApp',
+    notice: 'Este formulario todavía no está conectado a un servidor, así que tu mensaje no se ha enviado. Escríbenos por WhatsApp o a <a href="mailto:{email}">{email}</a> y te respondemos.'
+  },
+  en: {
+    skip: 'Skip to content',
+    menuOpen: 'Open menu',
+    menuClose: 'Close menu',
+    whatsapp: 'Message us on WhatsApp',
+    notice: 'This form is not connected to a server yet, so your message has not been sent. Message us on WhatsApp or email <a href="mailto:{email}">{email}</a> and we will get back to you.'
+  }
+};
+
+var WA_PENDING = /X/i.test(SITE_CONFIG.whatsapp);
+
+function reducedMotion() {
+  return !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+}
+function $all(sel, ctx) { return Array.prototype.slice.call((ctx || document).querySelectorAll(sel)); }
+function syncScroll() { if (window.__tgOnScroll) window.__tgOnScroll(); }
+
+/* Ruta canónica de una vista: SIEMPRE /servicios, nunca el prefijo local.
+   Es la que va en canonical, og:url y hreflang. */
+function routePath(key, lang) {
+  for (var i = 0; i < ROUTES.length; i++) if (ROUTES[i].key === key) return ROUTES[i][lang];
+  return lang === 'en' ? '/en/' : '/';
+}
+/* href real que se pone en los <a>, ya adaptado al alojamiento. */
+function urlFor(key, lang) {
+  var path = routePath(key, lang);
+  if (USE_HASH) return DOC_PATH + '#' + path;
+  return ((BASE + path).replace(/\/{2,}/g, '/')) || '/';
+}
+function waHref(lang) {
+  if (WA_PENDING) return urlFor('contact', lang);
+  return 'https://wa.me/' + SITE_CONFIG.whatsapp +
+         '?text=' + encodeURIComponent(SITE_CONFIG.whatsappText[lang] || SITE_CONFIG.whatsappText.es);
+}
+
+/* Reescribe los enlaces internos al formato que funciona aquí. Guarda la ruta
+   canónica en data-route, así es idempotente y el interceptor de clics sabe
+   a qué vista lleva cada enlace sin adivinar nada del href. */
+function rewriteLinks() {
+  $all('a[href]').forEach(function (a) {
+    // Los de WhatsApp y el selector de idioma dependen de la ruta activa:
+    // los gobierna route(), no esta pasada inicial.
+    if (a.hasAttribute('data-wa') || a.hasAttribute('data-switch-lang')) return;
+    var canon = a.getAttribute('data-route') || a.getAttribute('href');
+    var hit = CANON[canon];
+    if (!hit) return;
+    a.setAttribute('data-route', canon);
+    a.setAttribute('href', urlFor(hit.key, hit.lang));
+  });
+}
+
+var elHeaders, elFooters, elPages, elMethod, elFlow, elWa;
+function cacheNodes() {
+  elHeaders = $all('[data-role="header"]');
+  elFooters = $all('[data-role="footer"]');
+  elPages   = $all('[data-role="page"]');
+  elMethod  = $all('[data-method-rail]');
+  elFlow    = $all('[data-flow]');
+  elWa      = $all('[data-wa]');
+}
+
+/* --------------------------------------------------------------- marquee */
+/* Se construye una vez con las repeticiones justas para que un grupo cubra la
+   pantalla; a partir de ahí lo mueve sólo el @keyframes. Nada atado al
+   scroll, al hover ni a la visibilidad. */
+function buildMarquees() {
+  var perGroup = Math.max(3, Math.ceil(window.innerWidth / 420));
+  $all('[data-marquee]').forEach(function (track) {
+    if (track.getAttribute('data-reps') === String(perGroup)) return;
+    var words = track.getAttribute('data-marquee').split(',');
+    var group = '';
+    for (var i = 0; i < perGroup; i++) {
+      for (var w = 0; w < words.length; w++) group += '<span>' + words[w] + '</span><i></i>';
+    }
+    // Dos grupos idénticos + keyframe a -50% = bucle sin costura.
+    track.innerHTML = '<div class="marquee-group">' + group + '</div><div class="marquee-group">' + group + '</div>';
+    track.setAttribute('data-reps', String(perGroup));
+  });
+}
+
+/* ---------------------------------------------------------------- router */
+function matchPath(p) {
+  p = (p || '/').split('?')[0].replace(/\/+$/, '');
+  if (p === '') p = '/';
+  if (p === '/en') p = '/en/';
+  var hit = CANON[p];
+  if (hit) return { lang: hit.lang, key: hit.key };
+  return { lang: /^\/en(\/|$)/.test(p) ? 'en' : 'es', key: 'home' };
+}
+function currentRoute() {
+  if (USE_HASH) return matchPath(location.hash.replace(/^#/, '') || '/');
+  var p = location.pathname;
+  if (BASE && p.indexOf(BASE) === 0) p = p.slice(BASE.length) || '/';
+  return matchPath(p);
+}
+/* Compatibilidad con los enlaces antiguos #/es/services. */
+function migrateLegacyHash() {
+  var m = location.hash.match(/^#\/(es|en)\/(home|services|about|contact)$/);
+  if (!m) return false;
+  var url = urlFor(m[2], m[1]);
+  if (USE_HASH) location.replace(url); else history.replaceState({}, '', url);
+  return true;
+}
+function setMeta(sel, attr, value) {
+  var el = document.querySelector(sel);
+  if (el) el.setAttribute(attr, value);
+}
+
+function route() {
+  var r = currentRoute();
+  var lang = r.lang, key = r.key, t = STRINGS[lang], d = SITE_CONFIG.domain;
+
+  elHeaders.concat(elFooters).forEach(function (el) {
+    el.style.display = (el.getAttribute('data-lang') === lang) ? 'block' : 'none';
+  });
+
+  var current = null;
+  elPages.forEach(function (el) {
+    var match = el.getAttribute('data-lang') === lang && el.getAttribute('data-page') === key;
+    el.style.display = match ? 'block' : 'none';
+    if (match) current = el; else el.classList.remove('page-in');
+  });
+
+  document.title = SITE_TITLE;
+  document.documentElement.setAttribute('lang', lang);
+
+  // SEO por ruta: sólo cambia lo que debe cambiar. El título nunca.
+  setMeta('[data-seo="description"]', 'content', META[lang][key]);
+  setMeta('[data-seo="og-description"]', 'content', META[lang][key]);
+  setMeta('[data-seo="tw-description"]', 'content', META[lang][key]);
+  setMeta('[data-seo="canonical"]', 'href', d + routePath(key, lang));
+  setMeta('[data-seo="alt-es"]', 'href', d + routePath(key, 'es'));
+  setMeta('[data-seo="alt-en"]', 'href', d + routePath(key, 'en'));
+  setMeta('[data-seo="alt-default"]', 'href', d + routePath(key, 'es'));
+  setMeta('[data-seo="og-url"]', 'content', d + routePath(key, lang));
+  setMeta('[data-seo="og-locale"]', 'content', lang === 'en' ? 'en_US' : 'es_CO');
+
+  var skip = document.querySelector('[data-skip]');
+  if (skip) skip.textContent = t.skip;
+
+  // Se limpia en TODAS las cabeceras: si sólo se tocara la visible, la del
+  // otro idioma conservaría un aria-current obsoleto al cambiar de lengua.
+  $all('[data-role="header"] .nav-links a[aria-current]').forEach(function (a) { a.removeAttribute('aria-current'); });
+  elHeaders.forEach(function (header) {
+    if (header.getAttribute('data-lang') !== lang) return;
+    $all('.nav-links a', header).forEach(function (a) {
+      if (a.getAttribute('data-nav-key') === key) a.setAttribute('aria-current', 'page');
+    });
+    // El cambio de idioma conserva la página en la que está el visitante.
+    $all('[data-switch-lang]', header).forEach(function (a) {
+      var to = a.getAttribute('data-switch-lang');
+      a.setAttribute('href', urlFor(key, to));
+      a.setAttribute('data-route', routePath(key, to));
+      a.setAttribute('hreflang', to);
+      a.classList.toggle('active', to === lang);
+      if (to === lang) a.setAttribute('aria-current', 'true'); else a.removeAttribute('aria-current');
+    });
+    closeNav(header.querySelector('.nav'), lang);
+  });
+
+  var href = waHref(lang);
+  elWa.forEach(function (a) {
+    a.setAttribute('href', href);
+    if (WA_PENDING) {
+      // Marcador todavía: lleva a contacto y se navega sin recargar.
+      a.setAttribute('data-route', routePath('contact', lang));
+      a.removeAttribute('target'); a.removeAttribute('rel');
+    } else {
+      // Número real: enlace externo, el router NO debe interceptarlo.
+      a.removeAttribute('data-route');
+      a.setAttribute('target', '_blank'); a.setAttribute('rel', 'noopener noreferrer');
+    }
+    if (a.classList.contains('wa-float')) a.setAttribute('aria-label', t.whatsapp);
+  });
+
+  // El HTML ya trae el correo literal (visible sin JS); esto sólo garantiza
+  // que coincida con SITE_CONFIG si alguna vez cambia.
+  $all('[data-config="email"]').forEach(function (a) {
+    var host = a.closest('[data-lang]');
+    var mail = SITE_CONFIG.email[host ? host.getAttribute('data-lang') : lang] || SITE_CONFIG.email.es;
+    a.setAttribute('href', 'mailto:' + mail);
+    a.textContent = mail;
+  });
+
+  window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+  closeAllFaq();
+
+  requestAnimationFrame(function () {
+    if (current) current.classList.add('page-in');
+    pendingReveal = null;   // la página cambió: vuelve a mirar qué falta
+    revealVisible();
+    syncScroll();
+  });
+}
+
+function internalTarget(a) {
+  if (!a || a.target === '_blank' || a.hasAttribute('download')) return null;
+  return CANON[a.getAttribute('data-route')] || null;
+}
+function navigate(key, lang) {
+  var url = urlFor(key, lang);
+  try { history.pushState({}, '', url); }
+  catch (err) { location.href = url; return; }   // origen opaco: navega de verdad
+  route();
+}
+
+/* Revela lo que ya está en el viewport. Hace falta tras cambiar de ruta:
+   IntersectionObserver no vuelve a disparar para elementos que estaban
+   ocultos con display:none. */
+/* La lista de pendientes se consulta UNA vez por ruta y va encogiendo. Cuando
+   se vacía, la función cuesta una comparación: se puede llamar en cada
+   fotograma de scroll sin tocar el DOM. */
+var pendingReveal = null;
+function revealVisible() {
+  if (pendingReveal === null) pendingReveal = $all('[data-reveal]:not(.in-view)');
+  if (!pendingReveal.length) return;
+  var still = [];
+  for (var i = 0; i < pendingReveal.length; i++) {
+    var el = pendingReveal[i];
+    if (el.classList.contains('in-view')) continue;
+    if (el.offsetParent === null) { still.push(el); continue; }
+    var rect = el.getBoundingClientRect();
+    if (rect.top < window.innerHeight * 0.94 && rect.bottom > 0) el.classList.add('in-view');
+    else still.push(el);
+  }
+  pendingReveal = still;
+}
+
+/* -------------------------------------------------------------------- FAQ */
+function setFaq(item, open) {
+  var a = item.querySelector('.faq-a');
+  var q = item.querySelector('.faq-q');
+  item.classList.toggle('open', open);
+  if (q) q.setAttribute('aria-expanded', open ? 'true' : 'false');
+  if (a) a.style.maxHeight = open ? (a.scrollHeight + 'px') : null;
+}
+function closeAllFaq(scope) {
+  $all('.faq-item.open', scope).forEach(function (item) { setFaq(item, false); });
+}
+
+function closeNav(nav, lang) {
+  if (!nav) return;
+  nav.classList.remove('open');
+  var toggle = nav.querySelector('.nav-toggle');
+  if (toggle) {
+    toggle.setAttribute('aria-expanded', 'false');
+    toggle.setAttribute('aria-label', STRINGS[lang || currentRoute().lang].menuOpen);
+  }
+}
+
+window.addEventListener('popstate', route);
+window.addEventListener('hashchange', function () { if (USE_HASH) route(); });
+
+document.addEventListener('DOMContentLoaded', function () {
+  cacheNodes();
+  rewriteLinks();          // adapta los href canónicos al alojamiento real
+  // El año del copyright se calcula al cargar: nunca queda escrito a mano.
+  // El valor del HTML es sólo el respaldo para quien no ejecute JavaScript.
+  $all('[data-year]').forEach(function (el) { el.textContent = new Date().getFullYear(); });
+  buildMarquees();
+  migrateLegacyHash();
+  route();
+
+  /* --------------------------------------------- navegación con History API */
+  // En modo hash no hace falta interceptar: el href ya cambia el hash.
+  if (!USE_HASH) {
+    document.addEventListener('click', function (e) {
+      if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+      var a = e.target.closest ? e.target.closest('a[href]') : null;
+      var hit = internalTarget(a);
+      if (!hit) return;
+      e.preventDefault();
+      if (a.getAttribute('href') === location.pathname) { window.scrollTo({ top: 0, behavior: 'auto' }); return; }
+      navigate(hit.key, hit.lang);
+    });
+  }
+
+  /* ------------------------------------------------------------ skip link */
+  $all('[data-skip]').forEach(function (link) {
+    link.addEventListener('click', function (e) {
+      var main = document.getElementById('main');
+      if (!main) return;
+      e.preventDefault();
+      main.focus();
+      main.scrollIntoView({ behavior: reducedMotion() ? 'auto' : 'smooth', block: 'start' });
+    });
+  });
+
+  /* ------------------------------------------------------------ menú móvil */
+  $all('.nav-toggle').forEach(function (toggle) {
+    var nav = toggle.closest('.nav');
+    if (!nav) return;
+    var lang = nav.closest('[data-role="header"]').getAttribute('data-lang');
+    toggle.addEventListener('click', function () {
+      var open = !nav.classList.contains('open');
+      nav.classList.toggle('open', open);
+      toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+      toggle.setAttribute('aria-label', open ? STRINGS[lang].menuClose : STRINGS[lang].menuOpen);
+    });
+    $all('.nav-links a', nav).forEach(function (link) {
+      link.addEventListener('click', function () { closeNav(nav, lang); });
+    });
+  });
+  document.addEventListener('keydown', function (e) {
+    if (e.key !== 'Escape') return;
+    $all('.nav.open').forEach(function (nav) {
+      closeNav(nav);
+      var t = nav.querySelector('.nav-toggle');
+      if (t) t.focus();
+    });
+  });
+  document.addEventListener('click', function (e) {
+    $all('.nav.open').forEach(function (nav) { if (!nav.contains(e.target)) closeNav(nav); });
+  });
+
+  /* -------------------------------------------- NIVEL 2 — reveal de secciones */
+  var revealEls = $all('[data-reveal]');
+  if ('IntersectionObserver' in window && revealEls.length) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add('in-view');
+        io.unobserve(entry.target);
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -6% 0px' });
+    revealEls.forEach(function (el) { io.observe(el); });
+
+    // En táctil no hay hover: la flecha del principio se insinúa al entrar.
+    if (window.matchMedia && window.matchMedia('(hover: none)').matches) {
+      var pio = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) { if (e.isIntersecting) e.target.classList.add('touched'); });
+      }, { threshold: 0.35 });
+      $all('.principle').forEach(function (el) { pio.observe(el); });
+    }
+  } else {
+    revealEls.forEach(function (el) { el.classList.add('in-view'); });
+  }
+  revealVisible();
+
+  /* --------------------------------------------------------------- FAQ */
+  var faqSeq = 0;
+  $all('.faq-item').forEach(function (item) {
+    var q = item.querySelector('.faq-q');
+    var a = item.querySelector('.faq-a');
+    if (!q || !a) return;
+    faqSeq++;
+    a.id = 'faq-panel-' + faqSeq;
+    q.id = 'faq-q-' + faqSeq;
+    q.setAttribute('aria-controls', a.id);
+    a.setAttribute('role', 'region');
+    a.setAttribute('aria-labelledby', q.id);
+    q.addEventListener('click', function () {
+      var willOpen = !item.classList.contains('open');
+      closeAllFaq(item.closest('.faq') || document);
+      if (willOpen) setFaq(item, true);
+    });
+  });
+
+  /* ------------------------------ NIVEL 3 — activación coordinada de grupos */
+  // Puntero usa :hover; teclado y clic comparten .is-active, así el
+  // comportamiento del grupo es idéntico en cualquier dispositivo.
+  function groupActivation(groupSel, itemSel) {
+    $all(groupSel).forEach(function (group) {
+      var items = $all(itemSel, group);
+      function setActive(el) {
+        items.forEach(function (i) { i.classList.toggle('is-active', i === el); });
+        group.classList.toggle('has-active', !!el);
+      }
+      items.forEach(function (item) {
+        item.addEventListener('mouseenter', function () { setActive(item); });
+        item.addEventListener('focus', function () { setActive(item); });
+        item.addEventListener('blur', function () { setActive(null); });
+        item.addEventListener('click', function () { setActive(item); });
+      });
+      group.addEventListener('mouseleave', function () { setActive(null); });
+    });
+  }
+  groupActivation('[data-principles]', '[data-principle]');
+  groupActivation('[data-duo]', '[data-svc]');
+
+  /* ----------------------------------------- índice del hero (táctil) */
+  // En escritorio manda :hover y el enlace navega al primer clic. En táctil
+  // el primer toque revela y el segundo navega. El toque se detecta con un
+  // evento real, no con media query: en híbridos la media query miente.
+  var touchUsed = false;
+  window.addEventListener('touchstart', function () { touchUsed = true; }, { passive: true });
+  function hasNoHover() {
+    return touchUsed || !!(window.matchMedia && window.matchMedia('(hover: none)').matches);
+  }
+  $all('[data-index]').forEach(function (list) {
+    var armed = null;
+    var items = $all('[data-idx]', list);
+    function activate(el) {
+      items.forEach(function (i) { i.classList.toggle('is-active', i === el); });
+      list.classList.toggle('has-active', !!el);
+    }
+    items.forEach(function (item) {
+      item.addEventListener('mouseenter', function () { activate(item); });
+      item.addEventListener('focus', function () { activate(item); });
+      item.addEventListener('blur', function () { activate(null); if (armed === item) armed = null; });
+      list.addEventListener('mouseleave', function () { activate(null); });
+      item.addEventListener('click', function (e) {
+        if (!hasNoHover()) return;   // escritorio: sigue el enlace
+        if (armed === item) return;  // segundo toque: navega
+        e.preventDefault();
+        e.stopPropagation();
+        activate(item);
+        armed = item;
+      });
+    });
+  });
+
+  /* ------------------------------------------------ estado de los campos */
+  $all('.form .field').forEach(function (field) {
+    var input = field.querySelector('input, select, textarea');
+    if (!input) return;
+    function sync() { field.classList.toggle('filled', !!String(input.value || '').trim()); }
+    input.addEventListener('input', sync);
+    input.addEventListener('change', sync);
+    input.addEventListener('blur', sync);
+    sync();
+  });
+
+  /* ------------------------------------------------------------- forms */
+  // Sin backend conectado: nunca decimos que el mensaje se envió y nunca
+  // borramos lo que el visitante escribió. Al conectar el CRM basta con poner
+  // un atributo action en el <form> y este bloque se aparta solo.
+  $all('.form').forEach(function (form) {
+    if (form.getAttribute('action')) return;
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var page = form.closest('[data-role="page"]');
+      var lang = page ? page.getAttribute('data-lang') : 'es';
+      var notice = form.querySelector('.notice');
+      if (!notice) return;
+      var mail = SITE_CONFIG.email[lang] || SITE_CONFIG.email.es;
+      notice.innerHTML = STRINGS[lang].notice.split('{email}').join(mail);
+      notice.classList.add('show');
+      notice.scrollIntoView({ behavior: reducedMotion() ? 'auto' : 'smooth', block: 'center' });
+    });
+  });
+
+  /* ------------------------------- NIVEL 4 — narrativa ligada al scroll */
+  // Sólo dos raíles se rellenan con el scroll (metodología y sistema). No hay
+  // parallax, ni transformaciones por fotograma sobre elementos grandes.
+  var ticking = false;
+
+  function fillRail(el, items, vertical) {
+    var reduced = reducedMotion();
+    var p = 1;
+    if (!reduced) {
+      var rect = el.getBoundingClientRect();
+      var start = window.innerHeight * 0.82;
+      var end = window.innerHeight * 0.28;
+      p = (start - rect.top) / Math.max(1, (start - end) + rect.height * 0.55);
+      p = Math.max(0, Math.min(1, p));
+    }
+    el.style.setProperty('--p', p.toFixed(3));
+    var active = Math.min(items.length - 1, Math.floor(p * items.length + 0.0001));
+    var started = p > 0.02;
+    for (var i = 0; i < items.length; i++) {
+      if (vertical) {
+        items[i].classList.toggle('on', started && i <= active);
+      } else {
+        items[i].classList.toggle('is-done', started && i <= active);
+        items[i].classList.toggle('is-current', started && i === active && p < 1);
+      }
+    }
+  }
+
+  function onScroll() {
+    document.documentElement.classList.toggle('is-scrolled', window.scrollY > 8);
+    // Red de seguridad del reveal. Si IntersectionObserver no dispara (pestaña
+    // en segundo plano, restauración de scroll, bfcache…), un titular con
+    // clip-path se queda recortado para siempre y deja un hueco vacío en su
+    // lugar. Esto garantiza que todo lo que entra en pantalla se muestre.
+    revealVisible();
+    for (var i = 0; i < elMethod.length; i++) {
+      if (elMethod[i].offsetParent === null) continue;
+      fillRail(elMethod[i], elMethod[i].querySelectorAll('.step'), false);
+    }
+    for (var j = 0; j < elFlow.length; j++) {
+      if (elFlow[j].offsetParent === null) continue;
+      fillRail(elFlow[j], elFlow[j].querySelectorAll('li'), true);
+    }
+    ticking = false;
+  }
+  window.__tgOnScroll = onScroll;
+
+  window.addEventListener('scroll', function () {
+    if (!ticking) { ticking = true; requestAnimationFrame(onScroll); }
+  }, { passive: true });
+
+  var resizeTimer = 0;
+  window.addEventListener('resize', function () {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(function () {
+      buildMarquees();
+      $all('.faq-item.open .faq-a').forEach(function (a) { a.style.maxHeight = a.scrollHeight + 'px'; });
+      onScroll();
+    }, 150);
+  });
+
+  onScroll();
+});
+</script>
+</body>
+</html>
